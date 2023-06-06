@@ -1,0 +1,45 @@
+<nav class="col-2 p-3 d-flex flex-column justify-content-between align-items-center vh-100">
+  <div class="d-flex flex-column align-items-center align-items-lg-start position-fixed">
+    <a class="text-decoration-none mt-2" href="/tweet">
+      <i class="d-block fa-brands fa-twitter" style="color: #1d9bf0"></i
+    ></a>
+    <div class="d-flex align-items-center">
+      <a class="text-decoration-none text-black" href="/tweet">
+        <i class="mt-2 fa-solid fa-house mt-3" style="color: #000000"></i>
+        <p class="d-none d-lg-inline">Home</p>
+      </a>
+    </div>
+    <a class="text-decoration-none text-black" href="/usuarios/<%=user.username %>">
+      <i class="fa-regular fa-user mt-3" style="color: #000000"></i>
+      <p class="d-none d-lg-inline">Profile</p>
+    </a>
+    <a
+      href="/tweet"
+      class="d-none d-lg-block btn btn-primary rounded-pill mt-3"
+      style="background-color: #1d9bf0; border: none"
+    >
+      Tweet
+    </a>
+
+    <a
+      class="btn btn-primary rounded-pill d-block d-lg-none mt-3"
+      style="background-color: #1d9bf0; border: none"
+      href="/tweet"
+    >
+      <i class="fa-solid fa-feather" style="color: #ffffff"></i>
+    </a>
+  </div>
+
+  <div
+    class="d-flex flex-column align-items-center align-items-lg-start"
+    style="position: fixed; bottom: 20px"
+  >
+    <form action="/logout" method="POST">
+      <button class="btn btn-danger rounded-pill d-none d-lg-block" type="submit">Logout</button>
+    </form>
+
+    <a href="/" class="btn btn-danger rounded-pill d-block d-lg-none">
+      <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff"></i>
+    </a>
+  </div>
+</nav>

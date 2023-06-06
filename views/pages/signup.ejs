@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include("../partials/meta")%>
+    <!--Own CSS-->
+    <link rel="stylesheet" href="css/signup.css" />
+    <title>Sign up</title>
+    <!--Estilos para el mensaje de error-->
+    <style>
+      .error-message {
+        background-color: #d3a7ae;
+        color: #ce1616;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <% if (failureFlash && failureFlash.length > 0) { %>
+    <div class="error-message">
+      <% failureFlash.forEach(message => { %>
+      <p><%= message %></p>
+      <% }); %>
+    </div>
+    <% } %>
+    <div class="container-md mt-5" style="display: flex; justify-content: center">
+      <div class="row gx-0 d-flex" style="margin-top: 3%">
+        <div class="sidebar col-7">
+          <i class="fa-brands fa-twitter icon"></i>
+          <h1 class="hi">Hi! Welcome to Twitter clone 👋</h1>
+        </div>
+        <div class="col-5 align-items-center">
+          <div class="form-container">
+            <form
+              action="/signup"
+              method="POST"
+              class="rounded-border"
+              enctype="multipart/form-data"
+            >
+              <h1 class="pt-5">
+                <strong>Sign up</strong>
+              </h1>
+              <p class="separate">Create an account and start using Twitter</p>
+              <div class="input-container">
+                <input type="text" class="insert" name="firstname" placeholder="First name" />
+                <input type="text" class="insert" name="lastname" placeholder="Last name" />
+                <input type="email" class="insert" name="email" placeholder="Email" />
+                <input type="text" class="insert" name="username" placeholder="Username" />
+                <label for="archivo" class="file-label">
+                  <input type="file" id="archivo" name="file" class="file" />
+                </label>
+                <input type="password" class="insert" name="password" placeholder="Password" />
+              </div>
+              <div class="bottom">
+                <button class="signUp" type="submit">Sign up</button>
+                <p class="pt-2">Already have an account?</p>
+                <a href="/login" style="text-decoration: none">Sign in</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://kit.fontawesome.com/f40fceaee4.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

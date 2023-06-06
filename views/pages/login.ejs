@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include("../partials/meta")%>
+    <!--Own CSS-->
+    <link rel="stylesheet" href="css/login.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container-md mt-5" style="display: flex; justify-content: center">
+      <div class="row gx-0 d-flex">
+        <div class="sidebar col-7">
+          <i class="fa-brands fa-twitter icon"></i>
+          <h1 class="hi">Hey! Nice to see you again 🥰</h1>
+        </div>
+        <div class="col-5 d-flex align-items-center">
+          <div class="form-container">
+            <form action="/login" method="POST" class="rounded-border">
+              <h1 class="pt-5">
+                <strong>Login</strong>
+              </h1>
+              <p class="separate">Ready to start using Twitter?</p>
+              <div class="input-container pt-5">
+                <input
+                  type="text"
+                  class="insert"
+                  name="username"
+                  id="username"
+                  placeholder="Username or email"
+                />
+                <input
+                  type="password"
+                  class="insert"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="bottom">
+                <button class="signUp" type="submit">Login</button>
+                <p class="pt-2">Don't have an account?</p>
+                <a href="/signup" style="text-decoration: none">Sign up</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/f40fceaee4.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
