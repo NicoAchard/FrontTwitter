@@ -1,7 +1,44 @@
 import { Link } from "react-router-dom";
 import "../public/css/signup.css";
+import { useState } from "react";
 
 function Signup() {
+  const [inputFirstname, setInputFirstname] = useState("");
+  const [inputLastname, setInputLastname] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const [inputImage, setInputImage] = useState(null);
+  const [inputUsername, setInputUsername] = useState("");
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const handlerChangeStates = (value, text) => {
+    console.log(text);
+    switch (text) {
+      case "Firstname":
+        setInputFirstname(value);
+        break;
+      case "Lastname":
+        setInputLastname(value);
+        break;
+      case "Username":
+        setInputUsername(value);
+        break;
+      case "Email":
+        setInputEmail(value);
+        break;
+      case "Password":
+        setInputPassword(value);
+        break;
+      case "Image":
+        return setInputImage(value);
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <div
@@ -16,10 +53,11 @@ function Signup() {
           <div className="col-12 col-md-7 col-lg-5 align-items-center">
             <div className="form-container">
               <form
-                action="/signup"
+                action="http://localhost:3000/usuarios"
                 method="POST"
                 className="rounded-border"
                 encType="multipart/form-data"
+                onSubmit={handlerSubmit}
               >
                 <h1 className="pt-5">
                   <strong>Sign up</strong>
@@ -32,25 +70,41 @@ function Signup() {
                     type="text"
                     className="insert"
                     name="firstname"
-                    placeholder="First name"
+                    placeholder="Firstname"
+                    value={inputFirstname}
+                    onChange={(e) =>
+                      handlerChangeStates(e.target.value, "Firstname")
+                    }
                   />
                   <input
                     type="text"
                     className="insert"
                     name="lastname"
-                    placeholder="Last name"
+                    placeholder="Lastname"
+                    value={inputLastname}
+                    onChange={(e) =>
+                      handlerChangeStates(e.target.value, "Lastname")
+                    }
                   />
                   <input
                     type="email"
                     className="insert"
                     name="email"
                     placeholder="Email"
+                    value={inputEmail}
+                    onChange={(e) =>
+                      handlerChangeStates(e.target.value, "Email")
+                    }
                   />
                   <input
                     type="text"
                     className="insert"
                     name="username"
                     placeholder="Username"
+                    value={inputUsername}
+                    onChange={(e) =>
+                      handlerChangeStates(e.target.value, "Username")
+                    }
                   />
                   <label htmlFor="archivo" className="file-label">
                     <input
@@ -59,6 +113,10 @@ function Signup() {
                       id="archivo"
                       name="file"
                       className="file"
+                      value={inputImage}
+                      onChange={(e) =>
+                        handlerChangeStates(e.target.files[0], "Image")
+                      }
                     />
                   </label>
                   <input
@@ -66,6 +124,10 @@ function Signup() {
                     className="insert"
                     name="password"
                     placeholder="Password"
+                    value={inputPassword}
+                    onChange={(e) =>
+                      handlerChangeStates(e.target.value, "Password")
+                    }
                   />
                 </div>
                 <div className="bottom">
