@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../public/css/signup.css";
 import { useState } from "react";
 import axios from "axios";
 
@@ -56,12 +55,12 @@ function Signup() {
   return (
     <>
       <div
-        className="container-md mt-5"
+        className="container-md my-auto"
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div className="row gx-0 d-flex">
-          <div className="sidebar d-none col-5 col-lg-7 d-md-block">
-            <i className="bi bi-twitter"></i>
+          <div className="sidebar d-none col-5 col-lg-7 d-md-flex flex-column justify-content-between">
+            <i className="bi bi-twitter fs-1"></i>
             <h1 className="hi">Hi! Welcome to Twitter clone 👋</h1>
           </div>
           <div className="col-12 col-md-7 col-lg-5 align-items-center">
@@ -69,11 +68,11 @@ function Signup() {
               <form
                 action="http://localhost:3000/usuarios"
                 method="POST"
-                className="rounded-border"
+                className="rounded-border d-flex flex-column justify-content-center"
                 encType="multipart/form-data"
                 onSubmit={handleSubmit}
               >
-                <h1 className="pt-5">
+                <h1>
                   <strong>Sign up</strong>
                 </h1>
                 <p className="separate">
@@ -149,7 +148,7 @@ function Signup() {
                     Sign up
                   </button>
                   <p className="pt-2">Already have an account?</p>
-                  <Link to="/signup" style={{ textDecoration: "none" }}>
+                  <Link to="/login" style={{ textDecoration: "none" }}>
                     Sign in
                   </Link>
                 </div>
