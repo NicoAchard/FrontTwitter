@@ -1,18 +1,32 @@
 import { Link } from "react-router-dom";
 import "../public/css/signup.css";
 import { useState } from "react";
+import axios from "axios";
 
 function Signup() {
   const [inputFirstname, setInputFirstname] = useState("");
   const [inputLastname, setInputLastname] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
-  const [inputImage, setInputImage] = useState(null);
+  const [inputImage, setInputImage] = useState("");
   const [inputUsername, setInputUsername] = useState("");
 
-  const handlerSubmit = (e) => {
-    e.preventDefault();
-  };
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const response = await axios({
+      method: "POST",
+      url: "http://localhost:3000/usuarios",
+      data: {
+        email: inputEmail,
+        password: inputPassword,
+        firstname: inputFirstname,
+        lastname: inputLastname,
+        username: inputUsername,
+      },
+    });
+    console.log(response);
+    // dispatch(setToken(response.data.token));
+  }
 
   const handlerChangeStates = (value, text) => {
     console.log(text);
@@ -57,7 +71,7 @@ function Signup() {
                 method="POST"
                 className="rounded-border"
                 encType="multipart/form-data"
-                onSubmit={handlerSubmit}
+                onSubmit={handleSubmit}
               >
                 <h1 className="pt-5">
                   <strong>Sign up</strong>
