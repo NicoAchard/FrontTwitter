@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { saveToken } from "../redux/userSlice";
 
 function Signup() {
   const [inputFirstname, setInputFirstname] = useState("");
@@ -9,6 +11,7 @@ function Signup() {
   const [inputPassword, setInputPassword] = useState("");
   const [inputImage, setInputImage] = useState("");
   const [inputUsername, setInputUsername] = useState("");
+  const dispatch = useDispatch();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -23,34 +26,9 @@ function Signup() {
         username: inputUsername,
       },
     });
-    console.log(response);
-    // dispatch(setToken(response.data.token));
-  }
 
-  const handlerChangeStates = (value, text) => {
-    console.log(text);
-    switch (text) {
-      case "Firstname":
-        setInputFirstname(value);
-        break;
-      case "Lastname":
-        setInputLastname(value);
-        break;
-      case "Username":
-        setInputUsername(value);
-        break;
-      case "Email":
-        setInputEmail(value);
-        break;
-      case "Password":
-        setInputPassword(value);
-        break;
-      case "Image":
-        return setInputImage(value);
-      default:
-        break;
-    }
-  };
+    dispatch(saveToken(response.data.token));
+  }
 
   return (
     <>
@@ -85,9 +63,7 @@ function Signup() {
                     name="firstname"
                     placeholder="Firstname"
                     value={inputFirstname}
-                    onChange={(e) =>
-                      handlerChangeStates(e.target.value, "Firstname")
-                    }
+                    onChange={(event) => setInputFirstname(event.target.value)}
                   />
                   <input
                     type="text"
@@ -95,9 +71,7 @@ function Signup() {
                     name="lastname"
                     placeholder="Lastname"
                     value={inputLastname}
-                    onChange={(e) =>
-                      handlerChangeStates(e.target.value, "Lastname")
-                    }
+                    onChange={(event) => setInputLastname(event.target.value)}
                   />
                   <input
                     type="email"
@@ -105,9 +79,7 @@ function Signup() {
                     name="email"
                     placeholder="Email"
                     value={inputEmail}
-                    onChange={(e) =>
-                      handlerChangeStates(e.target.value, "Email")
-                    }
+                    onChange={(event) => setInputEmail(event.target.value)}
                   />
                   <input
                     type="text"
@@ -115,9 +87,7 @@ function Signup() {
                     name="username"
                     placeholder="Username"
                     value={inputUsername}
-                    onChange={(e) =>
-                      handlerChangeStates(e.target.value, "Username")
-                    }
+                    onChange={(event) => setInputUsername(event.target.value)}
                   />
                   <label htmlFor="archivo" className="file-label">
                     <input
@@ -127,9 +97,7 @@ function Signup() {
                       name="file"
                       className="file"
                       value={inputImage}
-                      onChange={(e) =>
-                        handlerChangeStates(e.target.files[0], "Image")
-                      }
+                      onChange={(event) => setInputImage(event.target.value)}
                     />
                   </label>
                   <input
@@ -138,9 +106,7 @@ function Signup() {
                     name="password"
                     placeholder="Password"
                     value={inputPassword}
-                    onChange={(e) =>
-                      handlerChangeStates(e.target.value, "Password")
-                    }
+                    onChange={(event) => setInputPassword(event.target.value)}
                   />
                 </div>
                 <div className="bottom">

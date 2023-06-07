@@ -1,6 +1,27 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { saveToken } from "../redux/userSlice";
+import { useDispatch } from "react-redux";
 
 function Login() {
+  const [inputUsernameEmail, setInputUsernameEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const dispatch = useDispatch();
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const response = await axios({
+      method: "POST",
+      url: "http://localhost:3000/login",
+      data: {
+        usernameEmail: inputUsernameEmail,
+        password: inputPassword,
+      },
+    });
+
+    dispatch(saveToken(response.data.token));
+  }
   return (
     <div
       className="container-md"
@@ -18,6 +39,7 @@ function Login() {
               method="POST"
               className="rounded-border d-flex flex-column justify-content-center"
               encType="multipart/form-data"
+              onSubmit={handleSubmit}
             >
               <h1>
                 <strong>Login</strong>
@@ -29,12 +51,18 @@ function Login() {
                   className="insert"
                   name="username"
                   placeholder="Username or email"
+                  value={inputUsernameEmail}
+                  onChange={(event) =>
+                    setInputUsernameEmail(event.target.value)
+                  }
                 />
                 <input
                   type="password"
                   className="insert"
                   name="password"
                   placeholder="Password"
+                  value={inputPassword}
+                  onChange={(event) => setInputPassword(event.target.value)}
                 />
               </div>
               <div className="bottom">
