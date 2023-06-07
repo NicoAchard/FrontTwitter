@@ -14,8 +14,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/profile/:id" element={<Profile />} />
-      <Route path="/followers/:id" element={<Followers />} />
-      <Route path="/following/:id" element={<Following />} />
+      <Route path="/followers" element={<Followers />} />
+      <Route path="/following" element={<Following />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<Error />} />
