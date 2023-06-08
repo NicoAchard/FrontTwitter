@@ -6,19 +6,13 @@ function Sidebar({ user }) {
   const navigate = useNavigate();
   return (
     <nav className="col-2 p-3 d-flex flex-column justify-content-between align-items-center vh-100">
-      <div className="d-flex flex-column align-items-center align-items-lg-start position-fixed">
+      <div className="d-flex flex-column align-items-center">
         <Link className="text-decoration-none mt-2" to="/tweet">
-          <i
-            className="d-block fa-brands fa-twitter"
-            style={{ color: "#1d9bf0" }}
-          ></i>
+          <i className="bi bi-twitter"></i>
         </Link>
         <div className="d-flex align-items-center">
           <Link className="text-decoration-none text-black" to="/tweet">
-            <i
-              className="mt-2 fa-solid fa-house mt-3"
-              style={{ color: "#000000" }}
-            ></i>
+            <i className="bi bi-house-door-fill"></i>
             <p className="d-none d-lg-inline">Home</p>
           </Link>
         </div>
@@ -26,10 +20,7 @@ function Sidebar({ user }) {
           className="text-decoration-none text-black"
           to={`/usuarios/${user.username}`}
         >
-          <i
-            className="fa-regular fa-user mt-3"
-            style={{ color: "#000000" }}
-          ></i>
+          <i className="bi bi-person-fill"></i>
           <p className="d-none d-lg-inline">Profile</p>
         </Link>
         <Link
@@ -45,14 +36,11 @@ function Sidebar({ user }) {
           style={{ backgroundColor: "#1d9bf0", border: "none" }}
           to="/tweet"
         >
-          <i className="fa-solid fa-feather" style={{ color: "#ffffff" }}></i>
+          <i className="bi bi-vector-pen" style={{ color: "white" }}></i>
         </Link>
       </div>
 
-      <div
-        className="d-flex flex-column align-items-center align-items-lg-start"
-        style={{ position: "fixed", bottom: "20px" }}
-      >
+      <div className="d-flex flex-column align-items-center">
         <form action="/logout" method="POST">
           <button
             className="btn btn-danger rounded-pill d-none d-lg-block"
@@ -67,10 +55,7 @@ function Sidebar({ user }) {
         </form>
 
         <Link to="/" className="btn btn-danger rounded-pill d-block d-lg-none">
-          <i
-            className="fa-solid fa-arrow-right-from-bracket"
-            style={{ color: "#ffffff" }}
-          ></i>
+          <i className="bi bi-arrow-bar-right" style={{ color: "white" }}></i>
         </Link>
       </div>
     </nav>

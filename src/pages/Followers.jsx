@@ -77,10 +77,7 @@ function Followers() {
                         style={{ backgroundColor: "#cad8db", border: "none" }}
                         to="/tweet"
                       >
-                        <i
-                          className="fa-solid fa-user"
-                          style={{ color: "#647788" }}
-                        ></i>
+                        <img src={follower.profilePicture} alt="picture" />
                       </Link>
                       <div className="d-flex flex-column">
                         <span style={{ fontSize: "1.2rem" }}>
