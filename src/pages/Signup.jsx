@@ -26,6 +26,9 @@ function Signup() {
         username: inputUsername,
       },
     });
+    if (response.data.error) {
+      console.log("Credenciales inválidas repetición");
+    }
 
     dispatch(saveToken(response.data.token));
   }
@@ -39,7 +42,7 @@ function Signup() {
         <div className="row gx-0 d-flex">
           <div className="sidebar d-none col-5 col-lg-7 d-md-flex flex-column justify-content-between">
             <i className="bi bi-twitter fs-1"></i>
-            <h1 className="hi">Hi! Welcome to Twitter clone 👋</h1>
+            <h1 className="text-center">Hi! Welcome to Twitter clone 👋</h1>
           </div>
           <div className="col-12 col-md-7 col-lg-5 align-items-center">
             <div className="form-container">
@@ -57,22 +60,26 @@ function Signup() {
                   Create an account and start using Twitter
                 </p>
                 <div className="input-container">
-                  <input
-                    type="text"
-                    className="insert"
-                    name="firstname"
-                    placeholder="Firstname"
-                    value={inputFirstname}
-                    onChange={(event) => setInputFirstname(event.target.value)}
-                  />
-                  <input
-                    type="text"
-                    className="insert"
-                    name="lastname"
-                    placeholder="Lastname"
-                    value={inputLastname}
-                    onChange={(event) => setInputLastname(event.target.value)}
-                  />
+                  <div className="d-flex gap-1">
+                    <input
+                      type="text"
+                      className="insert"
+                      name="firstname"
+                      placeholder="Firstname"
+                      value={inputFirstname}
+                      onChange={(event) =>
+                        setInputFirstname(event.target.value)
+                      }
+                    />
+                    <input
+                      type="text"
+                      className="insert"
+                      name="lastname"
+                      placeholder="Lastname"
+                      value={inputLastname}
+                      onChange={(event) => setInputLastname(event.target.value)}
+                    />
+                  </div>
                   <input
                     type="email"
                     className="insert"
@@ -113,10 +120,12 @@ function Signup() {
                   <button className="signUp" type="submit">
                     Sign up
                   </button>
-                  <p className="pt-2">Already have an account?</p>
-                  <Link to="/login" style={{ textDecoration: "none" }}>
-                    Sign in
-                  </Link>
+                  <p className="pt-2 d-flex align-items-center gap-1 justify-content-center">
+                    Already have an account?
+                    <Link to="/login" style={{ textDecoration: "none" }}>
+                      Sign in
+                    </Link>
+                  </p>
                 </div>
               </form>
             </div>

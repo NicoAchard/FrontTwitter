@@ -22,7 +22,7 @@ function Login() {
     });
 
     dispatch(saveToken(response.data.token));
-    navigate("/following");
+    navigate("/");
   }
   return (
     <div
@@ -32,7 +32,7 @@ function Login() {
       <div className="row gx-0 d-flex">
         <div className="sidebar d-none col-5 col-lg-7 d-md-flex flex-column justify-content-between">
           <i className="bi bi-twitter fs-1 d-flex align-items-self"></i>
-          <h1>Hey! Nice to see you again 🥰</h1>
+          <h1 className="text-center">Hey! Nice to see you again 🥰</h1>
         </div>
         <div className="col-12 col-md-7 col-lg-5 align-items-center h-100">
           <div className="form-container">
