@@ -1,10 +1,34 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Aside from "../components/Aside";
+import { useSelector } from "react-redux";
 
-export default () => {
+function Following() {
   const [user, setUser] = useState(null);
+  const token = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    const fetchFollowing = async () => {
+      try {
+        const options = {
+          method: "GET",
+          url: "http://localhost:3000/usuarios/following",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const response = await axios.request(options);
+        console.log(response.data.user);
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchFollowing();
+  }, []);
+
   return (
     <div class="container">
       <div class="row">
@@ -44,7 +68,6 @@ export default () => {
           <hr />
           <div class="row d-inline-flex justify-content-between align-items-center">
             <div class="col flex-column d-flex gap-2 align-items-center p-2">
-              {/* <% for( const following of user.following ) {%> */}
               <div class="d-flex justify-content-between w-100 p-3">
                 <div class="d-flex align-items-center gap-3">
                   <a
@@ -72,7 +95,6 @@ export default () => {
                   </form>
                 </div>
               </div>
-              {/* <% } %> */}
             </div>
           </div>
         </main>
@@ -80,4 +102,6 @@ export default () => {
       </div>
     </div>
   );
-};
+}
+
+export default Following;

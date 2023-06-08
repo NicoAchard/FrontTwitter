@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-export default () => {
+function Sidebar({ user }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -75,4 +75,6 @@ export default () => {
       </div>
     </nav>
   );
-};
+}
+
+export default Sidebar;
