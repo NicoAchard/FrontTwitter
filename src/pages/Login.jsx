@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { saveToken } from "../redux/userSlice";
@@ -8,6 +8,7 @@ function Login() {
   const [inputUsernameEmail, setInputUsernameEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -21,6 +22,7 @@ function Login() {
     });
 
     dispatch(saveToken(response.data.token));
+    navigate("/following");
   }
   return (
     <div

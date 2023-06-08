@@ -8,17 +8,21 @@ import Followers from "./pages/Followers";
 import Error from "./pages/404";
 
 import "./App.css";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/profile/:id" element={<Profile />} />
-      <Route path="/followers" element={<Followers />} />
-      <Route path="/following" element={<Following />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<Error />} />
+
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/followers" element={<Followers />} />
+        <Route path="/following" element={<Following />} />
+      </Route>
     </Routes>
   );
 }
