@@ -2,7 +2,10 @@
   padding-left: 70px;
   padding-right: 70px;
 }
-
+.img-avatar {
+  width: 40px;
+  height: 40px;
+}
 .input-container {
   display: flex;
   flex-direction: column;
@@ -22,7 +25,6 @@
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
 .signUp {
   margin-top: 5%;
   width: 100%;
@@ -61,7 +63,6 @@
 }
 
 @media (min-width: 769px) {
-
   .sidebar {
     border-radius: 10px 0 0 10px;
   }
@@ -72,11 +73,9 @@
 }
 
 @media (min-width: 691px) and (max-width: 768px) {
-
   .rounded-border {
     border-radius: 10px;
   }
-
 }
 
 @media (max-width: 691px) {

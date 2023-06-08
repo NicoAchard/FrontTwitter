@@ -72,13 +72,12 @@ function Followers() {
                     key={follower._id}
                   >
                     <div className="d-flex align-items-center gap-3">
-                      <Link
-                        className="btn btn-primary rounded-pill"
-                        style={{ backgroundColor: "#cad8db", border: "none" }}
-                        to="/tweet"
-                      >
-                        <img src={follower.profilePicture} alt="picture" />
-                      </Link>
+                      <img
+                        src={follower.profilePicture}
+                        alt="picture"
+                        className="rounded-circle img-avatar"
+                      />
+
                       <div className="d-flex flex-column">
                         <span style={{ fontSize: "1.2rem" }}>
                           {follower.username}

@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Sidebar({ user }) {
   const dispatch = useDispatch();
@@ -7,9 +8,7 @@ function Sidebar({ user }) {
   return (
     <nav className="col-2 p-3 d-flex flex-column justify-content-between align-items-center vh-100">
       <div className="d-flex flex-column align-items-center">
-        <Link className="text-decoration-none mt-2" to="/tweet">
-          <i className="bi bi-twitter"></i>
-        </Link>
+        <Link className="text-decoration-none mt-2" to="/tweet"></Link>
         <div className="d-flex align-items-center">
           <Link className="text-decoration-none text-black" to="/tweet">
             <i className="bi bi-house-door-fill"></i>
