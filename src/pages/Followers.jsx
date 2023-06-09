@@ -35,7 +35,7 @@ function Followers() {
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 ">
             <div className="d-flex align-items-center">
-              <Link to="/tweets">
+              <Link to={`/profile/${user.username}`}>
                 <i className="bi bi-arrow-left text-black ms-2"> </i>
               </Link>
               {console.log(user)}
@@ -48,73 +48,65 @@ function Followers() {
             </div>
             <div className="d-flex justify-content-around border-bottom border-1">
               <Link
-                to="/usuarios/followers"
+                to="/followers"
                 className="text-black fw-bold text-decoration-none pb-3 border-bottom border-4 border-bottom-blue"
                 style={{ borderColor: "rgba(29, 155, 240, 1) !important" }}
               >
                 Followers
               </Link>
 
-              <Link
-                to="/usuarios/following"
-                className="text-black text-decoration-none"
-              >
+              <Link to="/following" className="text-black text-decoration-none">
                 Following
               </Link>
             </div>
-            <div className=" flex-column d-flex gap-2 align-items-center p-2">
-              {user.followers.map((follower) => (
-                <div
-                  className="d-flex justify-content-between w-100 p-3"
-                  key={follower._id}
-                >
-                  <div className="d-flex align-items-center gap-3">
-                    <img
-                      src={follower.profilePicture}
-                      alt="picture"
-                      className="rounded-circle img-avatar"
-                    />
+            <div className="d-flex flex-column gap-2 align-items-center p-2">
+              {user.followers.map((follower) => {
+                const username = follower.username;
+                const regex = /^[A-Za-z]+/;
+                const match = username.match(regex);
+                const result = match ? match[0] : "";
 
-                    <div className="d-flex flex-column">
-                      <span style={{ fontSize: "1.2rem" }}>
-                        {follower.username}
-                      </span>
-                      <span className="text-secondary">
-                        @{follower.username}
-                      </span>
+                return (
+                  <div
+                    className="d-flex justify-content-between w-100 p-3"
+                    key={follower._id}
+                  >
+                    <div className="d-flex align-items-center gap-3">
+                      <img
+                        src={follower.profilePicture}
+                        alt="picture"
+                        className="rounded-circle img-avatar"
+                      />
+
+                      <div className="d-flex flex-column fs-6 fs-md-5">
+                        <span>{follower.firstname}</span>
+                        <span className="text-secondary">@{result}</span>
+                      </div>
+                    </div>
+                    <div>
+                      {user.following.includes(follower._id) ? (
+                        <button
+                          type="submit"
+                          className="btn btn-light rounded-pill fw-bold border-1 border-black"
+                          style={{ backgroundColor: "white" }}
+                        >
+                          Following
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-primary rounded-pill"
+                          style={{
+                            backgroundColor: "#1d9bf0",
+                            border: "none",
+                          }}
+                        >
+                          Follow
+                        </button>
+                      )}
                     </div>
                   </div>
-                  <div>
-                    {
-                      <form action="/usuarios/follow" method="POST">
-                        <input
-                          type="hidden"
-                          name="id"
-                          value="<%=follower._id%>"
-                        />
-                        {user.followers.includes(user.id) ? (
-                          <button
-                            type="submit"
-                            className="btn btn-light rounded-pill fw-bold border-1 border-black bg-white"
-                          >
-                            Following
-                          </button>
-                        ) : (
-                          <button
-                            className="btn btn-primary rounded-pill"
-                            style={{
-                              backgroundColor: "#1d9bf0",
-                              border: "none",
-                            }}
-                          >
-                            Follow
-                          </button>
-                        )}
-                      </form>
-                    }
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </main>
           <Aside />

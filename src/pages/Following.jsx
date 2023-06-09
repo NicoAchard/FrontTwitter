@@ -36,26 +36,28 @@ function Following() {
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 ">
             <div className="d-flex align-items-center">
-              <Link to={`/usuarios/${user.username}`}>
-                <i className="bi bi-arrow-left text-black ms-2"></i>
+              <Link to={`/profile/${user.username}`}>
+                <i className="bi bi-arrow-left text-black ms-2"> </i>
               </Link>
+              {console.log(user)}
               <div className="ms-4 mt-2">
                 <h5>
                   {user.firstname} {user.lastname}
                 </h5>
-                <p className="text-secondary">{user.username}</p>
+                <p className="text-secondary">@{user.username}</p>
               </div>
             </div>
-            <div className="row d-flex justify-content-around border-bottom border-1">
+            <div className="d-flex justify-content-around border-bottom border-1">
               <Link
-                to="/usuarios/followers"
+                to="/followers"
                 className="text-black text-decoration-none"
+                style={{ borderColor: "rgba(29, 155, 240, 1) !important" }}
               >
                 Followers
               </Link>
 
               <Link
-                to="/usuarios/following"
+                to="/following"
                 className="text-black fw-bold text-decoration-none pb-3 border-bottom border-4 border-bottom-blue"
               >
                 Following
@@ -82,13 +84,14 @@ function Following() {
                       />
 
                       <div className="d-flex flex-column fs-6 fs-md-5">
-                        <span>{result}</span>
+                        <span>{following.firstname}</span>
                         <span className="text-secondary">@{result}</span>
                       </div>
                     </div>
                     <div>
                       <form action="/usuarios/follow" method="post">
                         <input type="hidden" name="id" value={following._id} />
+
                         <button
                           type="submit"
                           className="btn btn-light rounded-pill fw-bold border-1 border-black"
