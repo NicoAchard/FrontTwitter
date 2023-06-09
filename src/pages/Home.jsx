@@ -65,8 +65,7 @@ export default () => {
           tweetId,
         },
       };
-      console.log(user._id);
-      console.log(tweetId);
+
       dispatch(toggleLike({ tweetId, userId: user._id }));
       const response = await axios.request(options);
       console.log(response);
@@ -97,7 +96,7 @@ export default () => {
 
   return (
     <div className="container">
-      {tweets && (
+      {tweets && user && (
         <div className="row">
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 d-flex flex-column">
