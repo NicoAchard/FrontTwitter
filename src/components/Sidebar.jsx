@@ -1,26 +1,39 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTwitter, faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+import { faHouse, faUser, faFeather } from "@fortawesome/free-solid-svg-icons";
+library.add(faTwitter, faFontAwesome, faHouse, faUser, faFeather);
 
 function Sidebar({ user }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
     <nav className="col-2 p-3 d-flex flex-column justify-content-between align-items-center vh-100">
-      <div className="d-flex flex-column align-items-center">
-        <Link className="text-decoration-none mt-2" to="/tweet"></Link>
-        <div className="d-flex align-items-center">
-          <Link className="text-decoration-none text-black" to="/tweet">
-            <i className="bi bi-house-door-fill"></i>
-            <p className="d-none d-lg-inline">Home</p>
-          </Link>
-        </div>
+      <div className="d-flex flex-column align-items-center align-items-lg-start gap-3">
+        <Link className="text-decoration-none " to="/tweet">
+          <FontAwesomeIcon
+            icon="fa-brands fa-twitter"
+            style={{ width: "20px" }}
+          />
+        </Link>
         <Link
-          className="text-decoration-none text-black"
+          className="text-decoration-none text-black d-flex gap-1 align-items-center"
+          to="/tweet"
+        >
+          <FontAwesomeIcon icon="fa-solid fa-house" style={{ width: "20px" }} />
+          <p className="d-none d-lg-inline m-0">Home</p>
+        </Link>
+
+        <Link
+          className="text-decoration-none text-black d-flex gap-1 align-items-center"
           to={`/usuarios/${user.username}`}
         >
-          <i className="bi bi-person-fill"></i>
-          <p className="d-none d-lg-inline">Profile</p>
+          <FontAwesomeIcon icon="fa-solid fa-user" style={{ width: "20px" }} />
+          <p className="d-none d-lg-flex m-0">Profile</p>
         </Link>
         <Link
           to="/tweet"
@@ -35,7 +48,7 @@ function Sidebar({ user }) {
           style={{ backgroundColor: "#1d9bf0", border: "none" }}
           to="/tweet"
         >
-          <i className="bi bi-vector-pen" style={{ color: "white" }}></i>
+          <FontAwesomeIcon icon="fa-solid fa-feather" />
         </Link>
       </div>
 
