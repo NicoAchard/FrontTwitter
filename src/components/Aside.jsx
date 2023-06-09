@@ -52,12 +52,10 @@ function Aside() {
             </div>
 
             <div className="d-flex flex-column">
-              <span style={{ fontSize: "0.9rem" }}>
+              <span className="aside-text-big">
                 <b>Hack Academy</b>
               </span>
-              <span className="text-secondary" style={{ fontSize: "0.8rem" }}>
-                @HackAcademyDev
-              </span>
+              <span className="aside-text-small">@HackAcademyDev</span>
             </div>
           </div>
           <Link
@@ -79,12 +77,10 @@ function Aside() {
             </div>
 
             <div className="d-flex flex-column">
-              <span style={{ fontSize: "0.9rem" }}>
+              <span className="aside-text-big">
                 <b>JavaScript</b>
               </span>
-              <span className="text-secondary" style={{ fontSize: "0.8rem" }}>
-                @JavaScript
-              </span>
+              <span className="aside-text-small">@JavaScript</span>
             </div>
           </div>
           <Link
@@ -106,12 +102,10 @@ function Aside() {
             </div>
 
             <div className="d-flex flex-column">
-              <span style={{ fontSize: "0.9rem" }}>
+              <span className="aside-text-big">
                 <b>MongoDB</b>
               </span>
-              <span className="text-secondary" style={{ fontSize: "0.8rem" }}>
-                @MongoDB
-              </span>
+              <span className="aside-text-small">@MongoDB</span>
             </div>
           </div>
           <Link
@@ -133,12 +127,10 @@ function Aside() {
             </div>
 
             <div className="d-flex flex-column">
-              <span style={{ fontSize: "0.9rem" }}>
+              <span className="aside-text-big">
                 <b>Node.js</b>
               </span>
-              <span className="text-secondary" style={{ fontSize: "0.8rem" }}>
-                @nodejs
-              </span>
+              <span className="aside-text-small">@nodejs</span>
             </div>
           </div>
           <Link
@@ -160,12 +152,10 @@ function Aside() {
             </div>
 
             <div className="d-flex flex-column">
-              <span style={{ fontSize: "0.8rem" }}>
+              <span className="aside-text-big">
                 <b>MDN Web DOcs</b>
               </span>
-              <span className="text-secondary" style={{ fontSize: "0.8rem" }}>
-                @MozDevNet
-              </span>
+              <span className="aside-text-small">@MozDevNet</span>
             </div>
           </div>
           <Link

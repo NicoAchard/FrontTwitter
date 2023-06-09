@@ -9,6 +9,7 @@ export default () => {
   const [user, setUser] = useState(null);
   const [like, setLike] = useState(false);
   const token = useSelector((state) => state.user.token);
+  const [inputTweet, setInputTweet] = useState("");
 
   useEffect(() => {
     const fetchTweet = async () => {
@@ -63,7 +64,25 @@ export default () => {
       console.error("Error fetching data:", error);
     }
   }
-
+  const handlerSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const options = {
+        method: "POST",
+        url: `${import.meta.env.VITE_API_URL}/tweets/`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          content: inputTweet,
+        },
+      };
+      const response = await axios.request(options);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   return (
     <div className="container">
       {tweets && (
@@ -74,7 +93,7 @@ export default () => {
               <h1 className="h5 ms-2 mt-3">Home</h1>
               <form
                 className="w-100 d-flex flex-column gap-2 p-2"
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handlerSubmit}
               >
                 <div className="w-100 d-flex gap-2">
                   <label htmlFor="content">
@@ -90,6 +109,8 @@ export default () => {
                     id="content"
                     className="form-control w-100 border-1"
                     placeholder="What's happening?"
+                    value={inputTweet}
+                    onChange={(e) => setInputTweet(e.target.value)}
                   />
                 </div>
                 <button
@@ -122,7 +143,6 @@ export default () => {
                       <span className="text-secondary">
                         @ {tweet.author.username} -{" "}
                         {tweet.createdAt.slice(0, 10)}
-                        {console.log(tweet.createdAt.slice(0, 10))}
                       </span>
                     </div>
                     <p> {tweet.content}</p>
