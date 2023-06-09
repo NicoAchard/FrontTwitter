@@ -44,6 +44,11 @@ export default () => {
     fetchTweet();
   }, []);
 
+  async function quitLike(tweetInfo) {
+    axios.post("/like", { tweetInfo });
+    await console.log(response.data);
+  }
+
   return (
     <div className="container">
       {tweets && (
@@ -107,19 +112,24 @@ export default () => {
                     </div>
                     <p> {tweet.content}</p>
                     <div className="d-flex justify-content-between">
-                      <form
-                        action="/tweet/like"
-                        method="POST"
-                        className="d-flex align-items-center gap-2"
-                      >
-                        <span className="text-pink">{tweet.likes.length}</span>
-                        <input
-                          type="hidden"
-                          name="tweetInfo"
-                          id="tweetInfo"
-                          value={tweet._id}
-                        />
-                      </form>
+                      <span className="text-pink">
+                        {tweet.likes.includes(user._id) ? (
+                          <i
+                            className="bi bi-heart-fill"
+                            onClick={quitLike((tweetInfo = tweet._id))}
+                            style={{ color: "red" }}
+                          ></i>
+                        ) : (
+                          <i className="bi bi-heart"></i>
+                        )}
+                        {tweet.likes.length}
+                      </span>
+                      <input
+                        type="hidden"
+                        name="tweetInfo"
+                        id="tweetInfo"
+                        value={tweet._id}
+                      />
                     </div>
                   </div>
                 </div>

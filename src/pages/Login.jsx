@@ -22,7 +22,7 @@ function Login() {
     });
 
     dispatch(saveToken(response.data.token));
-    navigate("/following");
+    navigate("/");
   }
   return (
     <div
