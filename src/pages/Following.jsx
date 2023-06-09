@@ -36,7 +36,7 @@ function Following() {
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 ">
             <div className="d-flex align-items-center">
-              <Link to={`/usuarios/${user.username}`}>
+              <Link to={`/profile/${user.username}`}>
                 <i className="bi bi-arrow-left text-black ms-2"></i>
               </Link>
               <div className="ms-4 mt-2">
@@ -46,7 +46,7 @@ function Following() {
                 <p className="text-secondary">{user.username}</p>
               </div>
             </div>
-            <div className="row d-flex justify-content-around border-bottom border-1">
+            <div className="d-flex justify-content-around border-bottom border-1">
               <Link
                 to="/usuarios/followers"
                 className="text-black text-decoration-none"

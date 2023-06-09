@@ -14,7 +14,7 @@ function Sidebar({ user }) {
   return (
     <nav className="col-2 p-3 d-flex flex-column justify-content-between align-items-center vh-100">
       <div className="d-flex flex-column align-items-center align-items-lg-start gap-3">
-        <Link className="text-decoration-none " to="/tweet">
+        <Link className="text-decoration-none " to="/tweets">
           <FontAwesomeIcon
             icon="fa-brands fa-twitter"
             style={{ width: "20px" }}
@@ -22,7 +22,7 @@ function Sidebar({ user }) {
         </Link>
         <Link
           className="text-decoration-none text-black d-flex gap-1 align-items-center"
-          to="/"
+          to="/tweets"
         >
           <FontAwesomeIcon icon="fa-solid fa-house" style={{ width: "20px" }} />
           <p className="d-none d-lg-inline m-0">Home</p>
@@ -30,13 +30,13 @@ function Sidebar({ user }) {
 
         <Link
           className="text-decoration-none text-black d-flex gap-1 align-items-center"
-          to={`/usuarios/${user.username}`}
+          to={`/profile/${user.username}`}
         >
           <FontAwesomeIcon icon="fa-solid fa-user" style={{ width: "20px" }} />
           <p className="d-none d-lg-flex m-0">Profile</p>
         </Link>
         <Link
-          to="/tweet"
+          to="/tweets"
           className="d-none d-lg-block btn btn-primary rounded-pill mt-3"
           style={{ backgroundColor: "#1d9bf0", border: "none" }}
         >
@@ -46,7 +46,7 @@ function Sidebar({ user }) {
         <Link
           className="btn btn-primary rounded-pill d-block d-lg-none mt-3"
           style={{ backgroundColor: "#1d9bf0", border: "none" }}
-          to="/tweet"
+          to="/tweets"
         >
           <FontAwesomeIcon icon="fa-solid fa-feather" />
         </Link>

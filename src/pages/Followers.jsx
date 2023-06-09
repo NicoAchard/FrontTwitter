@@ -35,7 +35,7 @@ function Followers() {
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 ">
             <div className="d-flex align-items-center">
-              <Link to="/tweets">
+              <Link to={`/profile/${user.username}`}>
                 <i className="bi bi-arrow-left text-black ms-2"> </i>
               </Link>
               {console.log(user)}
@@ -50,7 +50,6 @@ function Followers() {
               <Link
                 to="/usuarios/followers"
                 className="text-black fw-bold text-decoration-none pb-3 border-bottom border-4 border-bottom-blue"
-                style={{ borderColor: "rgba(29, 155, 240, 1) !important" }}
               >
                 Followers
               </Link>
