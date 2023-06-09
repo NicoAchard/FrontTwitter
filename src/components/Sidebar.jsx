@@ -22,7 +22,7 @@ function Sidebar({ user }) {
         </Link>
         <Link
           className="text-decoration-none text-black d-flex gap-1 align-items-center"
-          to="/tweet"
+          to="/"
         >
           <FontAwesomeIcon icon="fa-solid fa-house" style={{ width: "20px" }} />
           <p className="d-none d-lg-inline m-0">Home</p>
@@ -53,18 +53,15 @@ function Sidebar({ user }) {
       </div>
 
       <div className="d-flex flex-column align-items-center">
-        <form action="/logout" method="POST">
-          <button
-            className="btn btn-danger rounded-pill d-none d-lg-block"
-            type="submit"
-            onClick={() => {
-              dispatch(saveToken(null));
-              navigate("/login");
-            }}
-          >
-            Logout
-          </button>
-        </form>
+        <button
+          className="btn btn-danger rounded-pill d-none d-lg-block"
+          onClick={() => {
+            dispatch(saveToken(null));
+            navigate("/login");
+          }}
+        >
+          Logout
+        </button>
 
         <Link to="/" className="btn btn-danger rounded-pill d-block d-lg-none">
           <i className="bi bi-arrow-bar-right" style={{ color: "white" }}></i>

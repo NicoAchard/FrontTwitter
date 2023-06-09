@@ -44,16 +44,11 @@ function Aside() {
         <div className="d-inline-flex justify-content-between align-items-center">
           <div className="d-flex gap-2 align-items-center p-2">
             <div>
-              <Link
-                className="btn btn-primary rounded-pill"
-                style={{ backgroundColor: "#cad8db", border: "none" }}
-                to="/tweet"
-              >
-                <i
-                  className="fa-solid fa-user"
-                  style={{ color: "#647788" }}
-                ></i>
-              </Link>
+              <img
+                src="/img/default_avatar.png"
+                className="rounded-circle img-avatar"
+                alt="Avatar user MongoDB"
+              />
             </div>
 
             <div className="d-flex flex-column">
@@ -76,16 +71,11 @@ function Aside() {
         <div className="d-inline-flex justify-content-between align-items-center">
           <div className="d-flex gap-2 align-items-center p-2">
             <div>
-              <Link
-                className="btn btn-primary rounded-pill"
-                style={{ backgroundColor: "#cad8db", border: "none" }}
-                to="/tweet"
-              >
-                <i
-                  className="fa-solid fa-user"
-                  style={{ color: "#647788" }}
-                ></i>
-              </Link>
+              <img
+                src="/img/default_avatar.png"
+                className="rounded-circle img-avatar"
+                alt="Avatar user MongoDB"
+              />
             </div>
 
             <div className="d-flex flex-column">
@@ -108,16 +98,11 @@ function Aside() {
         <div className="d-inline-flex justify-content-between align-items-center">
           <div className="d-flex gap-2 align-items-center p-2">
             <div>
-              <Link
-                className="btn btn-primary rounded-pill"
-                style={{ backgroundColor: "#cad8db", border: "none" }}
-                to="/tweet"
-              >
-                <i
-                  className="fa-solid fa-user"
-                  style={{ color: "#647788" }}
-                ></i>
-              </Link>
+              <img
+                src="/img/default_avatar.png"
+                className="rounded-circle img-avatar"
+                alt="Avatar user MongoDB"
+              />
             </div>
 
             <div className="d-flex flex-column">
@@ -137,19 +122,14 @@ function Aside() {
             Follow
           </Link>
         </div>
-        <div className="d-inline-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex gap-2 align-items-center p-2">
             <div>
-              <Link
-                className="btn btn-primary rounded-pill"
-                style={{ backgroundColor: "#cad8db", border: "none" }}
-                to="/tweet"
-              >
-                <i
-                  className="fa-solid fa-user"
-                  style={{ color: "#647788" }}
-                ></i>
-              </Link>
+              <img
+                src="/img/default_avatar.png"
+                className="rounded-circle img-avatar"
+                alt="Avatar user MongoDB"
+              />
             </div>
 
             <div className="d-flex flex-column">
@@ -169,23 +149,18 @@ function Aside() {
             Follow
           </Link>
         </div>
-        <div className="d-inline-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex gap-2 align-items-center p-2">
             <div>
-              <Link
-                className="btn btn-primary rounded-pill"
-                style={{ backgroundColor: "#cad8db", border: "none" }}
-                to="/tweet"
-              >
-                <i
-                  className="fa-solid fa-user"
-                  style={{ color: "#647788" }}
-                ></i>
-              </Link>
+              <img
+                src="/img/default_avatar.png"
+                className="rounded-circle img-avatar"
+                alt="Avatar user MongoDB"
+              />
             </div>
 
             <div className="d-flex flex-column">
-              <span style={{ fontSize: "0.9rem" }}>
+              <span style={{ fontSize: "0.8rem" }}>
                 <b>MDN Web DOcs</b>
               </span>
               <span className="text-secondary" style={{ fontSize: "0.8rem" }}>
