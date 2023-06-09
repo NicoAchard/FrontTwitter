@@ -14,11 +14,12 @@ function Followers() {
       try {
         const options = {
           method: "GET",
-          url: "http://localhost:3000/usuarios/followers",
+          url: `${import.meta.env.VITE_API_URL}/usuarios/followers`,
           headers: {
             Authorization: `Bearer ${token}`,
           },
         };
+        console.log(`${import.meta.env.VITE_API_URL}usuarios/followers`);
         const response = await axios.request(options);
         setUser(response.data.user);
       } catch (error) {

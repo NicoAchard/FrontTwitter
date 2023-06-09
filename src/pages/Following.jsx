@@ -14,7 +14,7 @@ function Following() {
       try {
         const options = {
           method: "GET",
-          url: "http://localhost:3000/usuarios/following",
+          url: `${import.meta.env.VITE_API_URL}/usuarios/following`,
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -39,7 +39,7 @@ function Following() {
               <Link to={`/profile/${user.username}`}>
                 <i className="bi bi-arrow-left text-black ms-2"> </i>
               </Link>
-              {console.log(user)}
+
               <div className="ms-4 mt-2">
                 <h5>
                   {user.firstname} {user.lastname}
