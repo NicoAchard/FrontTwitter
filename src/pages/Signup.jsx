@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { saveToken } from "../redux/userSlice";
+import { saveToken, userLoggedId } from "../redux/userSlice";
 
 function Signup() {
   const [inputFirstname, setInputFirstname] = useState("");
@@ -31,6 +31,7 @@ function Signup() {
     }
 
     dispatch(saveToken(response.data.token));
+    dispatch(userLogged(response.data.userLoggedId));
   }
 
   return (

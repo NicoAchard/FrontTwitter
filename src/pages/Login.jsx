@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { saveToken } from "../redux/userSlice";
+import { saveToken, userLoggedId } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 
 function Login() {
@@ -22,6 +22,7 @@ function Login() {
     });
 
     dispatch(saveToken(response.data.token));
+    dispatch(userLogged(response.data.userLoggedId));
     navigate("/following");
   }
   return (

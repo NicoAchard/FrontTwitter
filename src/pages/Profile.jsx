@@ -12,6 +12,7 @@ export default () => {
   const tweets = useSelector((state) => state.tweets);
   const params = useParams();
   const token = useSelector((state) => state.user.token);
+  const userLoggedId = useSelector((state) => state.user.userLoggedId);
   const dispatch = useDispatch();
 
   const getUsernameShort = (username) => {
@@ -97,18 +98,22 @@ export default () => {
                     alt="Avatar del usuario"
                     className="img_avatar_perfil border-5 border border-white"
                   />
-                  <Link
-                    to=""
-                    className="btn btn-primary rounded-pill d-flex align-items-center justify-content-center position-absolute end-0 bottom-0"
-                    style={{
-                      backgroundColor: "#1d9bf0",
-                      border: "none",
-                      width: "100px",
-                      height: "40px",
-                    }}
-                  >
-                    Follow
-                  </Link>
+                  {userLoggedId !== user.id ? (
+                    <Link
+                      to=""
+                      className="btn btn-primary rounded-pill d-flex align-items-center justify-content-center position-absolute end-0 bottom-0"
+                      style={{
+                        backgroundColor: "#1d9bf0",
+                        border: "none",
+                        width: "100px",
+                        height: "40px",
+                      }}
+                    >
+                      Follow
+                    </Link>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <h1 className="h6"> {getUsernameShort(user.username)}</h1>
               </div>
