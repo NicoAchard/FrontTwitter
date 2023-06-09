@@ -42,7 +42,8 @@ export default () => {
             ></div>
             <div className="d-flex justify-content-between px-2">
               <div
-                className="d-flex flex-column position-relative gap-2"
+                className="d-flex flex-column position-relative gap-2 w-100
+                "
                 style={{ bottom: "50px" }}
               >
                 <div className="d-flex justify-content-between align-items-center">
@@ -53,7 +54,7 @@ export default () => {
                   />
                   <Link
                     to=""
-                    className="btn btn-primary rounded-pill"
+                    className="btn btn-primary rounded-pill mt-5"
                     style={{
                       backgroundColor: "#1d9bf0",
                       border: "none",
@@ -78,7 +79,7 @@ export default () => {
                 <small className="text-muted">
                   <span className="text-dark"> {user.following.length} </span>
                   <Link
-                    to="/usuarios/following"
+                    to="/following"
                     className="text-dark"
                     style={{ textDecoration: "none" }}
                   >
@@ -88,7 +89,7 @@ export default () => {
                 <small className="text-muted">
                   <span className="text-dark"> {user.followers.length} </span>
                   <Link
-                    to="/usuarios/followers"
+                    to="/followers"
                     className="text-dark"
                     style={{ textDecoration: "none" }}
                   >

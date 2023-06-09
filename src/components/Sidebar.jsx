@@ -15,7 +15,7 @@ function Sidebar({ user }) {
   const navigate = useNavigate();
   return (
     <nav className="col-2 p-3 d-flex flex-column justify-content-between align-items-center vh-100">
-      <div className="d-flex flex-column align-items-center align-items-lg-start gap-3">
+      <div className="d-flex flex-column align-items-center align-items-lg-start gap-3 w-100">
         <FontAwesomeIcon
           icon="fa-brands fa-twitter"
           style={{ width: "20px", color: " #1d9bf0 " }}
@@ -41,7 +41,7 @@ function Sidebar({ user }) {
         </Link>
         <Link
           to="/"
-          className="d-none d-lg-block btn btn-primary rounded-pill mt-3"
+          className="d-none d-lg-block btn btn-primary rounded-pill mt-3 w-100"
           style={{ backgroundColor: "#1d9bf0", border: "none" }}
         >
           Tweet
@@ -56,9 +56,9 @@ function Sidebar({ user }) {
         </Link>
       </div>
 
-      <div className="d-flex flex-column align-items-center">
+      <div className="d-flex flex-column align-items-center w-100">
         <button
-          className="btn btn-danger rounded-pill d-none d-lg-block"
+          className="btn btn-danger rounded-pill d-none d-lg-block w-100"
           type="submit"
           onClick={() => {
             dispatch(saveToken(null));
