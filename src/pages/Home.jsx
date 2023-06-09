@@ -14,7 +14,7 @@ export default () => {
       try {
         const options = {
           method: "GET",
-          url: "http://localhost:3000/tweets",
+          url: `${import.meta.env.VITE_API_URL}/tweets`,
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -29,7 +29,7 @@ export default () => {
       try {
         const options = {
           method: "GET",
-          url: "http://localhost:3000/usuarios/followers",
+          url: `${import.meta.env.VITE_API_URL}/usuarios/followers`,
           headers: {
             Authorization: `Bearer ${token}`,
           },

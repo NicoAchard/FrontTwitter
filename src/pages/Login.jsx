@@ -14,7 +14,7 @@ function Login() {
     event.preventDefault();
     const response = await axios({
       method: "POST",
-      url: "http://localhost:3000/login",
+      url: `${import.meta.env.VITE_API_URL}/login`,
       data: {
         usernameEmail: inputUsernameEmail,
         password: inputPassword,
