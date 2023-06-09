@@ -6,8 +6,9 @@ import { saveToken } from "../redux/userSlice";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTwitter, faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-import { faHouse, faUser, faFeather } from "@fortawesome/free-solid-svg-icons";
-library.add(faTwitter, faFontAwesome, faHouse, faUser, faFeather);
+import { faUser, far } from "@fortawesome/free-regular-svg-icons";
+import { faHouse, faFeather } from "@fortawesome/free-solid-svg-icons";
+library.add(faTwitter, faFontAwesome, faHouse, faUser, faFeather, far);
 
 function Sidebar({ user }) {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ function Sidebar({ user }) {
       <div className="d-flex flex-column align-items-center align-items-lg-start gap-3">
         <FontAwesomeIcon
           icon="fa-brands fa-twitter"
-          style={{ width: "20px", color: "skyblue" }}
+          style={{ width: "20px", color: " #1d9bf0 " }}
         />
 
         <Link
@@ -32,7 +33,10 @@ function Sidebar({ user }) {
           className="text-decoration-none text-black d-flex gap-1 align-items-center"
           to={`/profile/${user.username}`}
         >
-          <FontAwesomeIcon icon="fa-solid fa-user" style={{ width: "20px" }} />
+          <FontAwesomeIcon
+            icon="fa-regular fa-user"
+            style={{ width: "20px" }}
+          />
           <p className="d-none d-lg-flex m-0">Profile</p>
         </Link>
         <Link
