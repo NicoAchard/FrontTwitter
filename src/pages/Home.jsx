@@ -7,6 +7,7 @@ import axios from "axios";
 export default () => {
   const [tweets, setTweets] = useState(null);
   const [user, setUser] = useState(null);
+  const [like, setLike] = useState(false);
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
@@ -44,9 +45,23 @@ export default () => {
     fetchTweet();
   }, []);
 
-  async function quitLike(tweetInfo) {
-    axios.post("/like", { tweetInfo });
-    await console.log(response.data);
+  async function handlerLike(tweetId) {
+    try {
+      const options = {
+        method: "POST",
+        url: `${import.meta.env.VITE_API_URL}/tweets/like`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          tweetId,
+        },
+      };
+      const response = await axios.request(options);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
 
   return (
@@ -116,11 +131,15 @@ export default () => {
                         {tweet.likes.includes(user._id) ? (
                           <i
                             className="bi bi-heart-fill"
-                            onClick={quitLike((tweetInfo = tweet._id))}
-                            style={{ color: "red" }}
+                            onClick={() => handlerLike(tweet._id)}
+                            style={{ color: "red", cursor: "pointer" }}
                           ></i>
                         ) : (
-                          <i className="bi bi-heart"></i>
+                          <i
+                            className="bi bi-heart"
+                            onClick={() => handlerLike(tweet._id)}
+                            style={{ cursor: "pointer" }}
+                          ></i>
                         )}
                         {tweet.likes.length}
                       </span>
