@@ -20,7 +20,7 @@ function Following() {
           },
         };
         const response = await axios.request(options);
-        console.log(response.data.user);
+
         setUser(response.data.user);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -36,8 +36,8 @@ function Following() {
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 ">
             <div className="d-flex align-items-center">
-              <Link to="/usuarios/<%=user.username%>">
-                <i className="bi bi-arrow-left text-black ms-2"> </i>
+              <Link to={`/usuarios/${user.username}`}>
+                <i className="bi bi-arrow-left text-black ms-2"></i>
               </Link>
               <div className="ms-4 mt-2">
                 <h5>
@@ -63,50 +63,44 @@ function Following() {
             </div>
 
             <div className="d-flex flex-column gap-2 align-items-center p-2">
-              {/* <Link
-                    className="btn btn-primary rounded-pill"
-                    style={{ backgroundColor: "#cad8db", border: "none" }}
-                    to="/tweet"
-                  >
-                    <i className="fa-solid fa-user" style="color: #647788"></i>
-                  </Link> */}
-              {user.following.map((following) => (
-                <div
-                  className="d-flex justify-content-between w-100 p-3"
-                  key={following._id}
-                >
-                  <div className="d-flex align-items-center gap-3">
-                    <img
-                      src={following.profilePicture}
-                      alt="picture"
-                      className="rounded-circle img-avatar"
-                    />
+              {user.following.map((following) => {
+                const username = following.username;
+                const regex = /^[A-Za-z]+/;
+                const match = username.match(regex);
+                const result = match ? match[0] : "";
 
-                    <div className="d-flex flex-column fs-6 fs-md-5">
-                      <span>{following.username}</span>
-                      <span className="text-secondary">
-                        @ {following.username}
-                      </span>
+                return (
+                  <div
+                    className="d-flex justify-content-between w-100 p-3"
+                    key={following._id}
+                  >
+                    <div className="d-flex align-items-center gap-3">
+                      <img
+                        src={following.profilePicture}
+                        alt="picture"
+                        className="rounded-circle img-avatar"
+                      />
+
+                      <div className="d-flex flex-column fs-6 fs-md-5">
+                        <span>{result}</span>
+                        <span className="text-secondary">@{result}</span>
+                      </div>
+                    </div>
+                    <div>
+                      <form action="/usuarios/follow" method="post">
+                        <input type="hidden" name="id" value={following._id} />
+                        <button
+                          type="submit"
+                          className="btn btn-light rounded-pill fw-bold border-1 border-black"
+                          style={{ backgroundColor: "white" }}
+                        >
+                          Following
+                        </button>
+                      </form>
                     </div>
                   </div>
-                  <div>
-                    <form action="/usuarios/follow" method="post">
-                      <input
-                        type="hidden"
-                        name="id"
-                        value="<%=follower._id%>"
-                      />
-                      <button
-                        type="submit"
-                        className="btn btn-light rounded-pill fw-bold border-1 border-black"
-                        style={{ backgroundColor: "white" }}
-                      >
-                        Following
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </main>
           <Aside />
