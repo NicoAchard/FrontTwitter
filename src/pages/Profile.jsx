@@ -33,7 +33,6 @@ export default () => {
     <div className="container-fluid container-lg">
       {user && (
         <div className="row">
-          {console.log(user)}
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 d-flex flex-column">
             <div
