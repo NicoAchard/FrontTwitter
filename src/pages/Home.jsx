@@ -7,6 +7,7 @@ import axios from "axios";
 export default () => {
   const [tweets, setTweets] = useState(null);
   const [user, setUser] = useState(null);
+  const [like, setLike] = useState(false);
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
@@ -43,6 +44,25 @@ export default () => {
     fetchFollowers();
     fetchTweet();
   }, []);
+
+  async function handlerLike(tweetId) {
+    try {
+      const options = {
+        method: "POST",
+        url: `${import.meta.env.VITE_API_URL}/tweets/like`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          tweetId,
+        },
+      };
+      const response = await axios.request(options);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
 
   return (
     <div className="container">
@@ -107,19 +127,28 @@ export default () => {
                     </div>
                     <p> {tweet.content}</p>
                     <div className="d-flex justify-content-between">
-                      <form
-                        action="/tweet/like"
-                        method="POST"
-                        className="d-flex align-items-center gap-2"
-                      >
-                        <span className="text-pink">{tweet.likes.length}</span>
-                        <input
-                          type="hidden"
-                          name="tweetInfo"
-                          id="tweetInfo"
-                          value={tweet._id}
-                        />
-                      </form>
+                      <span className="text-pink">
+                        {tweet.likes.includes(user._id) ? (
+                          <i
+                            className="bi bi-heart-fill"
+                            onClick={() => handlerLike(tweet._id)}
+                            style={{ color: "red", cursor: "pointer" }}
+                          ></i>
+                        ) : (
+                          <i
+                            className="bi bi-heart"
+                            onClick={() => handlerLike(tweet._id)}
+                            style={{ cursor: "pointer" }}
+                          ></i>
+                        )}
+                        {tweet.likes.length}
+                      </span>
+                      <input
+                        type="hidden"
+                        name="tweetInfo"
+                        id="tweetInfo"
+                        value={tweet._id}
+                      />
                     </div>
                   </div>
                 </div>
