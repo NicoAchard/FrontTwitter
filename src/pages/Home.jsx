@@ -12,6 +12,12 @@ export default () => {
   const [inputTweet, setInputTweet] = useState("");
   const dispatch = useDispatch();
 
+  const getUsernameShort = (username) => {
+    const regex = /^[^@._-]+/;
+    const match = username.match(regex);
+    return match ? match[0] : username;
+  };
+
   useEffect(() => {
     const fetchTweet = async () => {
       try {
@@ -68,6 +74,7 @@ export default () => {
       console.error("Error fetching data:", error);
     }
   }
+
   const handlerSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -87,6 +94,7 @@ export default () => {
       console.error("Error fetching data:", error);
     }
   };
+
   return (
     <div className="container">
       {tweets && (
@@ -143,9 +151,9 @@ export default () => {
                   />
                   <div className="d-flex flex-column">
                     <div className="d-flex gap-2 flex-column">
-                      <h5>{tweet.author.username}</h5>
+                      <h5>{getUsernameShort(tweet.author.username)}</h5>
                       <span className="text-secondary">
-                        @ {tweet.author.username} -{" "}
+                        @ {getUsernameShort(tweet.author.username)} -{" "}
                         {tweet.createdAt.slice(0, 10)}
                       </span>
                     </div>

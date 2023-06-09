@@ -11,6 +11,12 @@ export default () => {
   const params = useParams();
   const token = useSelector((state) => state.user.token);
 
+  const getUsernameShort = (username) => {
+    const regex = /^[^@._-]+/;
+    const match = username.match(regex);
+    return match ? match[0] : username;
+  };
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -65,7 +71,7 @@ export default () => {
                     Follow
                   </Link>
                 </div>
-                <h1 className="h6"> {user.username}</h1>
+                <h1 className="h6"> {getUsernameShort(user.username)}</h1>
               </div>
             </div>
             <div
@@ -73,7 +79,9 @@ export default () => {
               style={{ bottom: "60px" }}
             >
               <div>
-                <small className="text-muted">@{user.username} </small>
+                <small className="text-muted">
+                  @{getUsernameShort(user.username)}{" "}
+                </small>
               </div>
               <div>
                 <small className="text-muted">
@@ -106,21 +114,24 @@ export default () => {
                 Tweets
               </b>
             </div>
-            {user.tweetList.map((tweet) => {
-              <div className="d-flex flex-column p-3 border-bottom border-top border-1">
+            {user.tweetList.map((tweet) => (
+              <div
+                className="d-flex flex-column p-3 border-bottom border-top border-1"
+                key={tweet._id}
+              >
                 <div className="d-flex gap-3">
                   <img
-                    src="<%=userUrl.profilePicture  %>"
-                    alt="Avatar del usuario <%=userUrl.username%>"
+                    src={user.profilePicture}
+                    alt={`Avatar del usuario ${user.username}`}
                     className="img_avatar"
                   />
                   <div className="d-flex flex-column">
-                    <div className="d-flex gap-2 flex-column">
-                      <h5>{user.username}</h5>
+                    {/* <div className="d-flex gap-2 flex-column">
+                      <h5>{getUsernameShort(tweet.author.username)}</h5>
                       <span className="text-secondary">
-                        @ {user.username} - formattedDate
+                        @ {getUsernameShort(tweet.author.username)}
                       </span>
-                    </div>
+                    </div> */}
                     <p> {tweet.content}</p>
                     <div className="d-flex justify-content-between">
                       <form
@@ -188,8 +199,8 @@ export default () => {
                     </div>
                   </div>
                 </div>
-              </div>;
-            })}
+              </div>
+            ))}
           </main>
           <Aside />
         </div>
