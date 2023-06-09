@@ -7,7 +7,6 @@ import Following from "./pages/Following";
 import Followers from "./pages/Followers";
 import Error from "./pages/404";
 
-import "./App.css";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
