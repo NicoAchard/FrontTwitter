@@ -45,12 +45,25 @@ export default () => {
                 className="d-flex flex-column position-relative gap-2"
                 style={{ bottom: "50px" }}
               >
-                <img
-                  src="<%=userUrl.profilePicture%>"
-                  alt="Avatar del usuario <%= userUrl.username %>"
-                  className="img_avatar_perfil border-5 border border-white"
-                />
-
+                <div className="d-flex justify-content-between align-items-center">
+                  <img
+                    src={user.profilePicture}
+                    alt="Avatar del usuario"
+                    className="img_avatar_perfil border-5 border border-white"
+                  />
+                  <Link
+                    to=""
+                    className="btn btn-primary rounded-pill"
+                    style={{
+                      backgroundColor: "#1d9bf0",
+                      border: "none",
+                      width: "100px",
+                      height: "40px",
+                    }}
+                  >
+                    Follow
+                  </Link>
+                </div>
                 <h1 className="h6"> {user.username}</h1>
               </div>
             </div>
@@ -59,7 +72,7 @@ export default () => {
               style={{ bottom: "60px" }}
             >
               <div>
-                <small className="text-muted">@ {user.username} </small>
+                <small className="text-muted">@{user.username} </small>
               </div>
               <div>
                 <small className="text-muted">

@@ -1,15 +1,16 @@
 import Sidebar from "../components/Sidebar";
 import Aside from "../components/Aside";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setTweets, toggleLike } from "../redux/tweetSlice";
 import axios from "axios";
 
 export default () => {
-  const [tweets, setTweets] = useState(null);
   const [user, setUser] = useState(null);
-  const [like, setLike] = useState(false);
+  const tweets = useSelector((state) => state.tweets);
   const token = useSelector((state) => state.user.token);
   const [inputTweet, setInputTweet] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchTweet = async () => {
@@ -22,7 +23,7 @@ export default () => {
           },
         };
         const response = await axios.request(options);
-        setTweets(response.data.tweets);
+        dispatch(setTweets(response.data.tweets));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -58,6 +59,9 @@ export default () => {
           tweetId,
         },
       };
+      console.log(user._id);
+      console.log(tweetId);
+      dispatch(toggleLike({ tweetId, userId: user._id }));
       const response = await axios.request(options);
       console.log(response);
     } catch (error) {
