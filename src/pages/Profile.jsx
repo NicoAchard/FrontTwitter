@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Aside from "../components/Aside";
+import { useState, useEffect } from "react";
 
 export default () => {
   const [user, setUser] = useState(null);

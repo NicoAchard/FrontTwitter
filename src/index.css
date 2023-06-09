@@ -84,4 +84,7 @@
   .rounded-border {
     border-radius: 10px;
   }
+  .position-absolute-sm {
+    position: absolute;
+  }
 }

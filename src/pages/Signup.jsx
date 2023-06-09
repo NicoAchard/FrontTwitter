@@ -34,9 +34,12 @@ function Signup() {
   }
 
   return (
-    <>
+    <div
+      className="vh-100 vw-100 d-flex align-items-center "
+      style={{ backgroundColor: "#0d8cdb" }}
+    >
       <div
-        className="container-md my-auto"
+        className="container-md h-75"
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div className="row gx-0 d-flex">
@@ -45,94 +48,90 @@ function Signup() {
             <h1 className="text-center">Hi! Welcome to Twitter clone 👋</h1>
           </div>
           <div className="col-12 col-md-7 col-lg-5 align-items-center">
-            <div className="form-container">
-              <form
-                action="http://localhost:3000/usuarios"
-                method="POST"
-                className="rounded-border d-flex flex-column justify-content-center"
-                encType="multipart/form-data"
-                onSubmit={handleSubmit}
-              >
-                <h1>
-                  <strong>Sign up</strong>
-                </h1>
-                <p className="separate">
-                  Create an account and start using Twitter
-                </p>
-                <div className="input-container">
-                  <div className="d-flex gap-1">
-                    <input
-                      type="text"
-                      className="insert"
-                      name="firstname"
-                      placeholder="Firstname"
-                      value={inputFirstname}
-                      onChange={(event) =>
-                        setInputFirstname(event.target.value)
-                      }
-                    />
-                    <input
-                      type="text"
-                      className="insert"
-                      name="lastname"
-                      placeholder="Lastname"
-                      value={inputLastname}
-                      onChange={(event) => setInputLastname(event.target.value)}
-                    />
-                  </div>
+            <form
+              action="http://localhost:3000/usuarios"
+              method="POST"
+              className="rounded-border d-flex flex-column justify-content-center align-items-center gap-2 h-100 w-100 bg-white position-absolute-sm top-0 start-0"
+              encType="multipart/form-data"
+              onSubmit={handleSubmit}
+            >
+              <h1>
+                <strong>Sign up</strong>
+              </h1>
+              <p className="separate">
+                Create an account and start using Twitter
+              </p>
+              <div className="input-container d-flex gap-2">
+                <div className="d-flex gap-1">
                   <input
-                    type="email"
+                    type="text"
                     className="insert"
-                    name="email"
-                    placeholder="Email"
-                    value={inputEmail}
-                    onChange={(event) => setInputEmail(event.target.value)}
+                    name="firstname"
+                    placeholder="Firstname"
+                    value={inputFirstname}
+                    onChange={(event) => setInputFirstname(event.target.value)}
                   />
                   <input
                     type="text"
                     className="insert"
-                    name="username"
-                    placeholder="Username"
-                    value={inputUsername}
-                    onChange={(event) => setInputUsername(event.target.value)}
+                    name="lastname"
+                    placeholder="Lastname"
+                    value={inputLastname}
+                    onChange={(event) => setInputLastname(event.target.value)}
                   />
-                  <label htmlFor="archivo" className="file-label">
-                    <input
-                      style={{ color: "transparent" }}
-                      type="file"
-                      id="archivo"
-                      name="file"
-                      className="file"
-                      value={inputImage}
-                      onChange={(event) => setInputImage(event.target.value)}
-                    />
-                  </label>
+                </div>
+                <input
+                  type="email"
+                  className="insert"
+                  name="email"
+                  placeholder="Email"
+                  value={inputEmail}
+                  onChange={(event) => setInputEmail(event.target.value)}
+                />
+                <input
+                  type="text"
+                  className="insert"
+                  name="username"
+                  placeholder="Username"
+                  value={inputUsername}
+                  onChange={(event) => setInputUsername(event.target.value)}
+                />
+                <label htmlFor="archivo" className="file-label">
                   <input
-                    type="password"
-                    className="insert"
-                    name="password"
-                    placeholder="Password"
-                    value={inputPassword}
-                    onChange={(event) => setInputPassword(event.target.value)}
+                    style={{ color: "transparent" }}
+                    type="file"
+                    id="archivo"
+                    name="file"
+                    className="file"
+                    value={inputImage}
+                    onChange={(event) => setInputImage(event.target.value)}
                   />
-                </div>
-                <div className="bottom">
-                  <button className="signUp" type="submit">
-                    Sign up
-                  </button>
-                  <p className="pt-2 d-flex align-items-center gap-1 justify-content-center">
-                    Already have an account?
-                    <Link to="/login" style={{ textDecoration: "none" }}>
-                      Sign in
-                    </Link>
-                  </p>
-                </div>
-              </form>
-            </div>
+                </label>
+                <input
+                  type="password"
+                  className="insert"
+                  name="password"
+                  placeholder="Password"
+                  value={inputPassword}
+                  onChange={(event) => setInputPassword(event.target.value)}
+                />
+              </div>
+              <div className="bottom">
+                <button className="signUp" type="submit">
+                  Sign up
+                </button>
+                <p className="pt-2 d-flex align-items-center gap-1 justify-content-center flex-column flex-sm-row">
+                  Already have an account?
+                  <Link to="/login" style={{ textDecoration: "none" }}>
+                    Sign in
+                  </Link>
+                </p>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

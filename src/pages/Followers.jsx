@@ -50,7 +50,6 @@ function Followers() {
               <Link
                 to="/followers"
                 className="text-black fw-bold text-decoration-none pb-3 border-bottom border-4 border-bottom-blue"
-                style={{ borderColor: "rgba(29, 155, 240, 1) !important" }}
               >
                 Followers
               </Link>
