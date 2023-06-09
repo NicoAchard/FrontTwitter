@@ -95,7 +95,7 @@ export default () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid container-lg">
       {tweets && user && (
         <div className="row">
           <Sidebar user={user} />
@@ -158,12 +158,12 @@ export default () => {
                     </div>
                     <p> {tweet.content}</p>
                     <div className="d-flex justify-content-between">
-                      <span className="text-pink">
+                      <span className="text-pink d-flex align-items-center gap-1">
                         {tweet.likes.includes(user._id) ? (
                           <i
                             className="bi bi-heart-fill"
                             onClick={() => handlerLike(tweet._id)}
-                            style={{ color: "red", cursor: "pointer" }}
+                            style={{ color: "#f91894", cursor: "pointer" }}
                           ></i>
                         ) : (
                           <i

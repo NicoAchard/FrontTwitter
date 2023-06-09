@@ -1,15 +1,18 @@
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { setTweets, toggleLike } from "../redux/tweetSlice";
 import Sidebar from "../components/Sidebar";
 import Aside from "../components/Aside";
 
 export default () => {
   const [user, setUser] = useState(null);
+  const tweets = useSelector((state) => state.tweets);
   const params = useParams();
   const token = useSelector((state) => state.user.token);
+  const dispatch = useDispatch();
 
   const getUsernameShort = (username) => {
     const regex = /^[^@._-]+/;
@@ -28,12 +31,49 @@ export default () => {
           },
         });
         setUser(response.data);
+        dispatch(setTweets(response.data.tweetList));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchProfile();
   }, []);
+
+  async function handlerLike(tweetId) {
+    try {
+      const options = {
+        method: "POST",
+        url: `${import.meta.env.VITE_API_URL}/tweets/like`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          tweetId,
+        },
+      };
+
+      dispatch(toggleLike({ tweetId, userId: user._id }));
+      const response = await axios.request(options);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  const handlerDelete = async (paramId) => {
+    try {
+      const response = await axios({
+        method: "DELETE",
+        url: `${import.meta.env.VITE_API_URL}/tweets/${paramId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <div className="container-fluid container-lg">
@@ -51,7 +91,7 @@ export default () => {
                 "
                 style={{ bottom: "50px" }}
               >
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex position-relative justify-content-between align-items-center">
                   <img
                     src={user.profilePicture}
                     alt="Avatar del usuario"
@@ -59,7 +99,7 @@ export default () => {
                   />
                   <Link
                     to=""
-                    className="btn btn-primary rounded-pill mt-5"
+                    className="btn btn-primary rounded-pill d-flex align-items-center justify-content-center position-absolute end-0 bottom-0"
                     style={{
                       backgroundColor: "#1d9bf0",
                       border: "none",
@@ -83,21 +123,27 @@ export default () => {
                 </small>
               </div>
               <div>
-                <small className="text-muted">
-                  <span className="text-dark"> {user.following.length} </span>
+                <small>
+                  <span className="text-dark fw-bold">
+                    {" "}
+                    {user.following.length}{" "}
+                  </span>
                   <Link
                     to="/following"
-                    className="text-dark"
+                    className="text-secondary"
                     style={{ textDecoration: "none" }}
                   >
                     Following
                   </Link>
                 </small>
-                <small className="text-muted">
-                  <span className="text-dark"> {user.followers.length} </span>
+                <small>
+                  <span className="text-dark fw-bold">
+                    {" "}
+                    {user.followers.length}{" "}
+                  </span>
                   <Link
                     to="/followers"
-                    className="text-dark"
+                    className="text-secondary"
                     style={{ textDecoration: "none" }}
                   >
                     Followers
@@ -122,79 +168,39 @@ export default () => {
                   <img
                     src={user.profilePicture}
                     alt={`Avatar del usuario ${user.username}`}
-                    className="img_avatar"
+                    className="img-avatar rounded-circle"
                   />
-                  <div className="d-flex flex-column">
-                    {/* <div className="d-flex gap-2 flex-column">
-                      <h5>{getUsernameShort(tweet.author.username)}</h5>
-                      <span className="text-secondary">
-                        @ {getUsernameShort(tweet.author.username)}
-                      </span>
-                    </div> */}
+                  <div className="d-flex flex-column w-100">
                     <p> {tweet.content}</p>
                     <div className="d-flex justify-content-between">
-                      <form
-                        action="/tweet/like"
-                        method="POST"
-                        className="d-flex align-items-center gap-2"
-                      >
-                        <span className="text-pink">{tweet.likes.length}</span>
-                        <input
-                          type="hidden"
-                          name="tweetInfo"
-                          id="tweetInfo"
-                          // value="<%=tweet._id%>"
-                        />
-                        {tweet.likes.includes(user._id)}
-                        <button
-                          type="submit"
-                          style={{
-                            backGround: "none",
-                            border: "none",
-                            padding: "0",
-                          }}
-                        >
+                      <span className="text-pink d-flex align-items-center gap-1">
+                        {tweet.likes.includes(user._id) ? (
                           <i
-                            className="fa-solid fa-heart"
-                            style={{ color: "#f91894" }}
+                            className="bi bi-heart-fill"
+                            onClick={() => handlerLike(tweet._id)}
+                            style={{ color: "#f91894", cursor: "pointer" }}
                           ></i>
-                        </button>
-
-                        <button
-                          type="submit"
-                          style={{
-                            backGround: "none",
-                            border: "none",
-                            padding: "0",
-                          }}
-                        >
+                        ) : (
                           <i
-                            className="fa-regular fa-heart"
-                            style={{ color: "#f91894" }}
+                            className="bi bi-heart"
+                            onClick={() => handlerLike(tweet._id)}
+                            style={{ cursor: "pointer" }}
                           ></i>
-                        </button>
-                      </form>
+                        )}
+                        {tweet.likes.length}
+                      </span>
 
-                      {user.tweetList.includes(tweet._id) && (
-                        <form
-                          action="/tweet/<%= tweet._id %>?_method=DELETE"
-                          method="post"
-                        >
-                          <button
-                            type="submit"
-                            style={{
-                              backGround: "none",
-                              border: "none",
-                              padding: "0",
-                            }}
-                          >
-                            <i
-                              className="fa-solid fa-trash"
-                              style={{ color: "#dc3545" }}
-                            ></i>
-                          </button>
-                        </form>
-                      )}
+                      <span className="text-pink d-flex align-items-center gap-1">
+                        {user.tweetList.some(
+                          (item) => item._id === tweet._id
+                        ) && (
+                          <FontAwesomeIcon
+                            style={{ color: "#dc3545", cursor: "pointer" }}
+                            onClick={() => handlerDelete(tweet._id)}
+                            icon="fa-solid fa-trash"
+                          />
+                        )}
+                      </span>
                     </div>
                   </div>
                 </div>

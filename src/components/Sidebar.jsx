@@ -4,12 +4,6 @@ import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { saveToken } from "../redux/userSlice";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTwitter, faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-import { faUser, far } from "@fortawesome/free-regular-svg-icons";
-import { faHouse, faFeather } from "@fortawesome/free-solid-svg-icons";
-library.add(faTwitter, faFontAwesome, faHouse, faUser, faFeather, far);
-
 function Sidebar({ user }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();

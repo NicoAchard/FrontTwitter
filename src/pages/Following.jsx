@@ -30,7 +30,7 @@ function Following() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container-fluid container-lg">
       {user && (
         <div className="row">
           <Sidebar user={user} />
