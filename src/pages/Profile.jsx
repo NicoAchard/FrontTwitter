@@ -31,7 +31,7 @@ export default () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUser(response.data);
+        setUser(response.data.user);
         dispatch(setTweets(response.data.tweetList));
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -70,7 +70,7 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
+      dispatch(setTweets(response.data.tweetList));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -78,7 +78,7 @@ export default () => {
 
   return (
     <div className="container-fluid container-lg">
-      {user && (
+      {tweets && user && (
         <div className="row">
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 d-flex flex-column">
@@ -164,7 +164,8 @@ export default () => {
                 Tweets
               </b>
             </div>
-            {user.tweetList.map((tweet) => (
+            {console.log(tweets)}
+            {tweets.map((tweet) => (
               <div
                 className="d-flex flex-column p-3 border-bottom border-top border-1"
                 key={tweet._id}
@@ -196,9 +197,7 @@ export default () => {
                       </span>
 
                       <span className="text-pink d-flex align-items-center gap-1">
-                        {user.tweetList.some(
-                          (item) => item._id === tweet._id
-                        ) && (
+                        {tweets.some((item) => item._id === tweet._id) && (
                           <FontAwesomeIcon
                             style={{ color: "#dc3545", cursor: "pointer" }}
                             onClick={() => handlerDelete(tweet._id)}
