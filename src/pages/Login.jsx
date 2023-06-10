@@ -23,7 +23,7 @@ function Login() {
 
     dispatch(saveToken(response.data.token));
     dispatch(userLoggedId(response.data.userLoggedId));
-    navigate("/following");
+    navigate("/");
   }
   return (
     <div

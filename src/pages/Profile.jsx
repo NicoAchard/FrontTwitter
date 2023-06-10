@@ -98,7 +98,7 @@ export default () => {
                     alt="Avatar del usuario"
                     className="img_avatar_perfil border-5 border border-white"
                   />
-                  {userLoggedId !== user.id ? (
+                  {userLoggedId !== user._id ? (
                     <Link
                       to=""
                       className="btn btn-primary rounded-pill d-flex align-items-center justify-content-center position-absolute end-0 bottom-0"
