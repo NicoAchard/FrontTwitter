@@ -151,7 +151,7 @@ export default () => {
                     <div className="d-flex gap-2 flex-column">
                       <h5>{getUsernameShort(tweet.author.username)}</h5>
                       <span className="text-secondary">
-                        @ {getUsernameShort(tweet.author.username)} -{" "}
+                        @{getUsernameShort(tweet.author.username)} -{" "}
                         {tweet.createdAt.slice(0, 10)}
                       </span>
                     </div>
