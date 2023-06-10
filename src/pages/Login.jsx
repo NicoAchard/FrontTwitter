@@ -22,7 +22,7 @@ function Login() {
     });
 
     dispatch(saveToken(response.data.token));
-    dispatch(userLogged(response.data.userLoggedId));
+    dispatch(userLoggedId(response.data.userLoggedId));
     navigate("/following");
   }
   return (

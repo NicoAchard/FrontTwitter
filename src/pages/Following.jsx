@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 function Following() {
   const [user, setUser] = useState(null);
   const token = useSelector((state) => state.user.token);
-
+  console.log(token);
   useEffect(() => {
     const fetchFollowing = async () => {
       try {

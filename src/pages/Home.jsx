@@ -96,7 +96,7 @@ export default () => {
 
   return (
     <div className="container-fluid container-lg">
-      {tweets && user && (
+      {user && tweets && (
         <div className="row">
           <Sidebar user={user} />
           <main className="col-10 col-md-6 border border-2 p-0 d-flex flex-column">
@@ -148,6 +148,7 @@ export default () => {
                     alt={`Avatar del usuario ${tweet.author.username}`}
                     className="img-avatar rounded-circle"
                   />
+                  {console.log(tweet.author.username)}
                   <div className="d-flex flex-column">
                     <div className="d-flex gap-2 flex-column">
                       <h5>{getUsernameShort(tweet.author.username)}</h5>

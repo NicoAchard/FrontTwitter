@@ -5,10 +5,10 @@ const userSlice = createSlice({
   initialState: null,
   reducers: {
     saveToken(state, action) {
-      return { token: action.payload };
+      return { ...state, token: action.payload };
     },
     userLoggedId(state, action) {
-      return { userLoggedId: action.payload };
+      return { ...state, userLoggedId: action.payload };
     },
   },
 });
