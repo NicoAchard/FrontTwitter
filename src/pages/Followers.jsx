@@ -106,7 +106,10 @@ function Followers() {
                       </div>
                     </div>
                     <div>
-                      {user.following.includes(follower._id) ? (
+                      {user.following.some(
+                        (item) =>
+                          item._id.toString() === follower._id.toString()
+                      ) ? (
                         <button
                           type="submit"
                           className="btn btn-light rounded-pill fw-bold border-1 border-black"

@@ -110,7 +110,10 @@ function Following() {
                       </div>
                     </div>
                     <div>
-                      {user.following.includes(following._id) ? (
+                      {user.following.some(
+                        (item) =>
+                          item._id.toString() === following._id.toString()
+                      ) ? (
                         <button
                           className="btn btn-primary rounded-pill"
                           style={{
