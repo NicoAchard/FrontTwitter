@@ -115,6 +115,15 @@ function Following() {
                           item._id.toString() === following._id.toString()
                       ) ? (
                         <button
+                          type="submit"
+                          className="btn btn-light rounded-pill fw-bold border-1 border-black"
+                          style={{ backgroundColor: "white" }}
+                          onClick={() => handlerFollow(following._id)}
+                        >
+                          Following
+                        </button>
+                      ) : (
+                        <button
                           className="btn btn-primary rounded-pill"
                           style={{
                             backgroundColor: "#1d9bf0",
@@ -123,15 +132,6 @@ function Following() {
                           onClick={() => handlerFollow(following._id)}
                         >
                           Follow
-                        </button>
-                      ) : (
-                        <button
-                          type="submit"
-                          className="btn btn-light rounded-pill fw-bold border-1 border-black"
-                          style={{ backgroundColor: "white" }}
-                          onClick={() => handlerFollow(following._id)}
-                        >
-                          Following
                         </button>
                       )}
                     </div>
