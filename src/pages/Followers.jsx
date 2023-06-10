@@ -29,6 +29,28 @@ function Followers() {
     fetchFollowers();
   }, []);
 
+  async function handlerFollow(userTargetId) {
+    console.log("hola");
+    try {
+      const options = {
+        method: "POST",
+        url: `${import.meta.env.VITE_API_URL}/usuarios/follow`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          id: userTargetId,
+        },
+      };
+
+      const response = await axios.request(options);
+      setUser(response.data.user);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
   return (
     <div className="container-fluid container-lg">
       {user && (
@@ -89,6 +111,7 @@ function Followers() {
                           type="submit"
                           className="btn btn-light rounded-pill fw-bold border-1 border-black"
                           style={{ backgroundColor: "white" }}
+                          onClick={() => handlerFollow(follower._id)}
                         >
                           Following
                         </button>
@@ -99,6 +122,7 @@ function Followers() {
                             backgroundColor: "#1d9bf0",
                             border: "none",
                           }}
+                          onClick={() => handlerFollow(follower._id)}
                         >
                           Follow
                         </button>

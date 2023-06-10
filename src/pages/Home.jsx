@@ -68,7 +68,6 @@ export default () => {
 
       dispatch(toggleLike({ tweetId, userId: user._id }));
       const response = await axios.request(options);
-      console.log(response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -148,7 +147,6 @@ export default () => {
                     alt={`Avatar del usuario ${tweet.author.username}`}
                     className="img-avatar rounded-circle"
                   />
-                  {console.log(tweet.author.username)}
                   <div className="d-flex flex-column">
                     <div className="d-flex gap-2 flex-column">
                       <h5>{getUsernameShort(tweet.author.username)}</h5>

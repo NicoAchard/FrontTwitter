@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 function Following() {
   const [user, setUser] = useState(null);
   const token = useSelector((state) => state.user.token);
-  console.log(token);
   useEffect(() => {
     const fetchFollowing = async () => {
       try {
@@ -28,6 +27,28 @@ function Following() {
     };
     fetchFollowing();
   }, []);
+
+  async function handlerFollow(userTargetId) {
+    console.log("hola");
+    try {
+      const options = {
+        method: "POST",
+        url: `${import.meta.env.VITE_API_URL}/usuarios/follow`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          id: userTargetId,
+        },
+      };
+
+      const response = await axios.request(options);
+      setUser(response.data.user);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
 
   return (
     <div className="container-fluid container-lg">
@@ -89,17 +110,27 @@ function Following() {
                       </div>
                     </div>
                     <div>
-                      <form action="/usuarios/follow" method="post">
-                        <input type="hidden" name="id" value={following._id} />
-
+                      {user.following.includes(following._id) ? (
+                        <button
+                          className="btn btn-primary rounded-pill"
+                          style={{
+                            backgroundColor: "#1d9bf0",
+                            border: "none",
+                          }}
+                          onClick={() => handlerFollow(following._id)}
+                        >
+                          Follow
+                        </button>
+                      ) : (
                         <button
                           type="submit"
                           className="btn btn-light rounded-pill fw-bold border-1 border-black"
                           style={{ backgroundColor: "white" }}
+                          onClick={() => handlerFollow(following._id)}
                         >
                           Following
                         </button>
-                      </form>
+                      )}
                     </div>
                   </div>
                 );
