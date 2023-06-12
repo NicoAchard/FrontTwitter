@@ -1,6 +1,7 @@
 .rounded-border {
   padding-left: 70px;
   padding-right: 70px;
+  border-radius: 0 10px 10px 0;
 }
 .img-avatar {
   width: 45px;
@@ -62,6 +63,7 @@
   display: block;
   color: white;
   padding: 45px;
+  border-radius: 10px 0 0 10px;
 }
 
 .file-label {
@@ -78,10 +80,6 @@
 }
 
 @media (max-width: 993px) {
-  .sidebar {
-    border-radius: 10px 0 0 10px;
-  }
-
   .rounded-border {
     border-radius: 0 10px 10px 0;
   }
@@ -94,7 +92,12 @@
   }
 }
 
-@media (max-width: 691px) {
+@media (max-width: 768px) {
+  .rounded-border {
+    border-radius: 10px;
+  }
+}
+@media (max-width: 421px) {
   .rounded-border {
     border-radius: 10px;
   }
