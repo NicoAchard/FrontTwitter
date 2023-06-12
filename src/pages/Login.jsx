@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { saveToken, userLoggedId } from "../redux/userSlice";
+import { saveToken, setUserData } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 
 function Login() {
@@ -20,9 +20,9 @@ function Login() {
         password: inputPassword,
       },
     });
-
     dispatch(saveToken(response.data.token));
-    dispatch(userLoggedId(response.data.userLoggedId));
+    dispatch(setUserData(response.data.user));
+
     navigate("/");
   }
   return (

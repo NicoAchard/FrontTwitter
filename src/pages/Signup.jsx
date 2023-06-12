@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { saveToken, userLoggedId } from "../redux/userSlice";
+import { saveToken, setUserData } from "../redux/userSlice";
 
 function Signup() {
   const [inputFirstname, setInputFirstname] = useState("");
@@ -11,13 +11,15 @@ function Signup() {
   const [inputPassword, setInputPassword] = useState("");
   const [inputImage, setInputImage] = useState("");
   const [inputUsername, setInputUsername] = useState("");
-  const dispatch = useDispatch();
 
-  async function handleSubmit(event) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  async function handlerSubmit(event) {
     event.preventDefault();
     const response = await axios({
       method: "POST",
-      url: `${import.meta.env.VITE_API_URL}/signup`,
+      url: `${import.meta.env.VITE_API_URL}/usuarios`,
       data: {
         email: inputEmail,
         password: inputPassword,
@@ -29,9 +31,10 @@ function Signup() {
     if (response.data.error) {
       console.log("Credenciales inválidas repetición");
     }
-
+    console.log(response.data);
     dispatch(saveToken(response.data.token));
-    dispatch(userLogged(response.data.userLoggedId));
+    dispatch(setUserData(response.data.user));
+    navigate("/");
   }
 
   return (
@@ -54,7 +57,7 @@ function Signup() {
               method="POST"
               className="rounded-border d-flex flex-column justify-content-center align-items-center gap-2 h-100 w-100 bg-white position-absolute-sm top-0 start-0"
               encType="multipart/form-data"
-              onSubmit={handleSubmit}
+              onSubmit={handlerSubmit}
             >
               <h1>
                 <strong>Sign up</strong>
