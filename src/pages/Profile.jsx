@@ -12,6 +12,7 @@ export default () => {
   const dispatch = useDispatch();
 
   const [userProfile, setUserProfile] = useState(null);
+  const [tweetsProfile, setTweetsProfile] = useState(null);
   const token = useSelector((state) => state.user.token);
   const userLoggedUsername = useSelector((state) => state.user.username);
   const userLoggedId = useSelector((state) => state.user.id);
@@ -32,6 +33,7 @@ export default () => {
           },
         });
         setUserProfile(response.data.user);
+        setTweetsProfile(response.data.user.tweetList);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -54,7 +56,7 @@ export default () => {
 
       //cambiar el estado de like en la aplicacion
       const userProfileUpdateLike = { ...userProfile };
-      userProfileUpdateLike.tweetList.map((tweet) => {
+      tweetsProfile.map((tweet) => {
         if (tweet._id === tweetId) {
           if (tweet.likes.includes(userLoggedId)) {
             tweet.likes = tweet.likes.filter((id) => id !== userLoggedId);
@@ -64,7 +66,8 @@ export default () => {
         }
       });
 
-      setUserProfile(userProfileUpdateLike);
+      setTweetsProfile(userProfileUpdateLike);
+
       await axios.request(options);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -82,19 +85,12 @@ export default () => {
       });
 
       //cambiar el estado de borrar en la aplicacion
-      const userProfileDeleteTweet = { ...userProfile };
-      userProfileDeleteTweet.tweetList.map((tweet) => {
-        if (tweet._id === tweetId) {
-          userProfileDeleteTweet.tweetList.filter((id) => id !== userLoggedId);
-          if (tweet.likes.includes(userLoggedId)) {
-            tweet.likes = tweet.likes.filter((id) => id !== userLoggedId);
-          } else {
-            tweet.likes.push(userLoggedId);
-          }
-        }
-      });
+      let userProfileDeleteTweet = tweetsProfile.filter(
+        (tweet) => tweet._id !== tweetId
+      );
+      console.log(userProfileDeleteTweet);
 
-      setUserProfile(userProfileUpdateLike);
+      setTweetsProfile(userProfileDeleteTweet);
 
       if (response.status === 200) {
       }
@@ -209,7 +205,7 @@ export default () => {
                 Tweets
               </b>
             </div>
-            {userProfile.tweetList.map((tweet) => (
+            {tweetsProfile.map((tweet) => (
               <div
                 className="d-flex flex-column p-3 border-bottom border-top border-1"
                 key={tweet._id}
@@ -249,7 +245,7 @@ export default () => {
                       </span>
 
                       <span className="text-pink d-flex align-items-center gap-1">
-                        {userProfile.tweetList.some(
+                        {tweetsProfile.some(
                           (item) => item._id === tweet._id
                         ) && (
                           <FontAwesomeIcon
