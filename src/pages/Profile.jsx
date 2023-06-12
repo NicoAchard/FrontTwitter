@@ -54,7 +54,7 @@ export default () => {
         },
       };
 
-      dispatch(toggleLike({ tweetId, userId: user._id }));
+      dispatch(toggleLike({ tweetId, userId: user.id }));
       const response = await axios.request(options);
       console.log(response);
     } catch (error) {
@@ -114,7 +114,7 @@ export default () => {
                     alt="Avatar del usuario"
                     className="img_avatar_perfil border-5 border border-white"
                   />
-                  {userLoggedId !== user._id ? (
+                  {userLoggedId !== user.id ? (
                     <Link
                       to=""
                       className="btn btn-primary rounded-pill d-flex align-items-center justify-content-center position-absolute end-0 bottom-0"
@@ -184,7 +184,7 @@ export default () => {
             {tweets.map((tweet) => (
               <div
                 className="d-flex flex-column p-3 border-bottom border-top border-1"
-                key={tweet._id}
+                key={tweet.id}
               >
                 <div className="d-flex gap-3">
                   <img
@@ -204,16 +204,16 @@ export default () => {
                     <p> {tweet.content}</p>
                     <div className="d-flex justify-content-between">
                       <span className="text-pink d-flex align-items-center gap-1">
-                        {tweet.likes.includes(user._id) ? (
+                        {tweet.likes.includes(user.id) ? (
                           <i
                             className="bi bi-heart-fill"
-                            onClick={() => handlerLike(tweet._id)}
+                            onClick={() => handlerLike(tweet.id)}
                             style={{ color: "#f91894", cursor: "pointer" }}
                           ></i>
                         ) : (
                           <i
                             className="bi bi-heart"
-                            onClick={() => handlerLike(tweet._id)}
+                            onClick={() => handlerLike(tweet.id)}
                             style={{ cursor: "pointer" }}
                           ></i>
                         )}
@@ -221,10 +221,10 @@ export default () => {
                       </span>
 
                       <span className="text-pink d-flex align-items-center gap-1">
-                        {tweets.some((item) => item._id === tweet._id) && (
+                        {tweets.some((item) => item.id === tweet.id) && (
                           <FontAwesomeIcon
                             style={{ color: "#dc3545", cursor: "pointer" }}
-                            onClick={() => handlerDelete(tweet._id)}
+                            onClick={() => handlerDelete(tweet.id)}
                             icon="fa-solid fa-trash"
                           />
                         )}

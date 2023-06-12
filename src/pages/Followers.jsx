@@ -91,7 +91,7 @@ function Followers() {
                 return (
                   <div
                     className="d-flex justify-content-between w-100 p-3"
-                    key={follower._id}
+                    key={follower.id}
                   >
                     <div className="d-flex align-items-center gap-3">
                       <img
@@ -107,14 +107,13 @@ function Followers() {
                     </div>
                     <div>
                       {user.following.some(
-                        (item) =>
-                          item._id.toString() === follower._id.toString()
+                        (item) => item.id.toString() === follower.id.toString()
                       ) ? (
                         <button
                           type="submit"
                           className="btn btn-light rounded-pill fw-bold border-1 border-black"
                           style={{ backgroundColor: "white" }}
-                          onClick={() => handlerFollow(follower._id)}
+                          onClick={() => handlerFollow(follower.id)}
                         >
                           Following
                         </button>
@@ -125,7 +124,7 @@ function Followers() {
                             backgroundColor: "#1d9bf0",
                             border: "none",
                           }}
-                          onClick={() => handlerFollow(follower._id)}
+                          onClick={() => handlerFollow(follower.id)}
                         >
                           Follow
                         </button>
