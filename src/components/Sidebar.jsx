@@ -29,7 +29,7 @@ function Sidebar({ user }) {
 
           <Link
             className="text-decoration-none text-black d-flex gap-1 align-items-center"
-            to={`/profile/${user.username}`}
+            to={`/profile/${user}`}
           >
             <FontAwesomeIcon
               icon="fa-regular fa-user"

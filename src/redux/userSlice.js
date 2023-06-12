@@ -7,12 +7,17 @@ const userSlice = createSlice({
     saveToken(state, action) {
       return { ...state, token: action.payload };
     },
-    userLoggedId(state, action) {
-      return { ...state, userLoggedId: action.payload };
+    setUserData(state, action) {
+      return {
+        ...state,
+        following: action.payload.following,
+        username: action.payload.username,
+        id: action.payload.id,
+      };
     },
   },
 });
 
 const { actions, reducer } = userSlice;
-export const { saveToken, userLoggedId } = actions;
+export const { saveToken, setUserData } = actions;
 export default reducer;

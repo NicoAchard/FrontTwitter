@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 function Following() {
   const [user, setUser] = useState(null);
   const token = useSelector((state) => state.user.token);
+  const userLoggedUsername = useSelector((state) => state.user.username);
   useEffect(() => {
     const fetchFollowing = async () => {
       try {
@@ -52,7 +53,7 @@ function Following() {
     <div className="container-fluid container-lg">
       {user && (
         <div className="row">
-          <Sidebar user={user} />
+          <Sidebar user={userLoggedUsername} />
           <main className="col-10 col-md-6 border border-2 p-0 ">
             <div className="d-flex align-items-center">
               <Link to={`/profile/${user.username}`}>

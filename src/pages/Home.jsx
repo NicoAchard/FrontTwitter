@@ -11,6 +11,7 @@ export default () => {
   const [user, setUser] = useState(null);
   const tweets = useSelector((state) => state.tweets);
   const token = useSelector((state) => state.user.token);
+  const userLoggedUsername = useSelector((state) => state.user.username);
   const [inputTweet, setInputTweet] = useState("");
   const dispatch = useDispatch();
 
@@ -132,7 +133,7 @@ export default () => {
     <div className="container-fluid container-lg">
       {user && (
         <div className="row">
-          <Sidebar user={user} />
+          <Sidebar user={userLoggedUsername} />
           <main className="col-10 col-md-6 border border-2 p-0 d-flex flex-column">
             {tweets ? (
               <div>
