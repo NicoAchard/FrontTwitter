@@ -3,19 +3,18 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { setTweets, toggleLike } from "../redux/tweetSlice";
 import Sidebar from "../components/Sidebar";
 import Aside from "../components/Aside";
 import { formatDistanceToNow, format } from "date-fns";
 
 export default () => {
-  const [user, setUser] = useState(null);
-  const tweets = useSelector((state) => state.tweets);
   const params = useParams();
-  const token = useSelector((state) => state.user.token);
-  const userLoggedId = useSelector((state) => state.user.userLoggedId);
   const dispatch = useDispatch();
 
+  const [userProfile, setUserProfile] = useState(null);
+  const token = useSelector((state) => state.user.token);
+  const userLoggedUsername = useSelector((state) => state.user.username);
+  const userLoggedId = useSelector((state) => state.user.id);
   const getUsernameShort = (username) => {
     const regex = /^[^@._-]+/;
     const match = username.match(regex);
@@ -23,7 +22,7 @@ export default () => {
   };
 
   useEffect(() => {
-    const fetchProfile = async () => {
+    const fetchUserProfile = async () => {
       try {
         const response = await axios({
           method: "GET",
@@ -32,13 +31,12 @@ export default () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUser(response.data.user);
-        dispatch(setTweets(response.data.tweetList));
+        setUserProfile(response.data.user);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    fetchProfile();
+    fetchUserProfile();
   }, []);
 
   async function handlerLike(tweetId) {
@@ -54,8 +52,21 @@ export default () => {
         },
       };
 
-      dispatch(toggleLike({ tweetId, userId: user.id }));
-      const response = await axios.request(options);
+      //cambiar el estado de like en la aplicacion
+      const userProfileUpdateLike = { ...userProfile };
+      userProfileUpdateLike.tweetList.map((tweet) => {
+        if (tweet._id === tweetId) {
+          console.log(tweet);
+          if (tweet.likes.includes(userLoggedId)) {
+            tweet.likes = tweet.likes.filter((id) => id !== userLoggedId);
+          } else {
+            tweet.likes.push(userLoggedId);
+          }
+        }
+      });
+
+      setUserProfile(userProfileUpdateLike);
+      await axios.request(options);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -93,9 +104,9 @@ export default () => {
 
   return (
     <div className="container-fluid container-lg">
-      {tweets && user && (
+      {userProfile && (
         <div className="row">
-          <Sidebar user={user} />
+          <Sidebar user={userLoggedUsername} />
           <main className="col-10 col-md-6 border border-2 p-0 d-flex flex-column">
             <div
               className="w-100"
@@ -109,11 +120,12 @@ export default () => {
               >
                 <div className="d-flex position-relative justify-content-between align-items-center">
                   <img
-                    src={user.profilePicture}
+                    src={userProfile.profilePicture}
                     alt="Avatar del usuario"
                     className="img_avatar_perfil border-5 border border-white"
                   />
-                  {userLoggedId !== user.id ? (
+
+                  {userProfile.username !== userLoggedUsername && (
                     <Link
                       to=""
                       className="btn btn-primary rounded-pill d-flex align-items-center justify-content-center position-absolute end-0 bottom-0"
@@ -126,11 +138,12 @@ export default () => {
                     >
                       Follow
                     </Link>
-                  ) : (
-                    ""
                   )}
                 </div>
-                <h1 className="h6"> {getUsernameShort(user.username)}</h1>
+                <h1 className="h6">
+                  {" "}
+                  {getUsernameShort(userProfile.username)}
+                </h1>
               </div>
             </div>
             <div
@@ -139,14 +152,14 @@ export default () => {
             >
               <div>
                 <small className="text-muted">
-                  @{getUsernameShort(user.username)}{" "}
+                  @{getUsernameShort(userProfile.username)}{" "}
                 </small>
               </div>
               <div>
                 <small>
                   <span className="text-dark fw-bold">
                     {" "}
-                    {user.following.length}{" "}
+                    {userProfile.following.length}{" "}
                   </span>
                   <Link
                     to="/following"
@@ -159,7 +172,7 @@ export default () => {
                 <small>
                   <span className="text-dark fw-bold">
                     {" "}
-                    {user.followers.length}{" "}
+                    {userProfile.followers.length}{" "}
                   </span>
                   <Link
                     to="/followers"
@@ -179,31 +192,30 @@ export default () => {
                 Tweets
               </b>
             </div>
-
-            {tweets.map((tweet) => (
+            {userProfile.tweetList.map((tweet) => (
               <div
                 className="d-flex flex-column p-3 border-bottom border-top border-1"
                 key={tweet._id}
               >
                 <div className="d-flex gap-3">
                   <img
-                    src={user.profilePicture}
-                    alt={`Avatar del usuario ${user.username}`}
+                    src={userProfile.profilePicture}
+                    alt={`Avatar del usuario ${userProfile.username}`}
                     className="img-avatar rounded-circle"
                   />
 
                   <div className="d-flex flex-column w-100">
                     <div className="d-flex gap-2 flex-column">
-                      <h5>{getUsernameShort(user.username)}</h5>
+                      <h5>{getUsernameShort(userProfile.username)}</h5>
                       <span className="text-secondary">
-                        @{getUsernameShort(user.username)} -{" "}
+                        @{getUsernameShort(userProfile.username)} -{" "}
                         {handleDate(new Date(tweet.createdAt))}
                       </span>
                     </div>
                     <p> {tweet.content}</p>
                     <div className="d-flex justify-content-between">
                       <span className="text-pink d-flex align-items-center gap-1">
-                        {tweet.likes.includes(user.id) ? (
+                        {tweet.likes.includes(userProfile.id) ? (
                           <i
                             className="bi bi-heart-fill"
                             onClick={() => handlerLike(tweet._id)}
@@ -220,7 +232,9 @@ export default () => {
                       </span>
 
                       <span className="text-pink d-flex align-items-center gap-1">
-                        {tweets.some((item) => item._id === tweet._id) && (
+                        {userProfile.tweetList.some(
+                          (item) => item._id === tweet._id
+                        ) && (
                           <FontAwesomeIcon
                             style={{ color: "#dc3545", cursor: "pointer" }}
                             onClick={() => handlerDelete(tweet._id)}
