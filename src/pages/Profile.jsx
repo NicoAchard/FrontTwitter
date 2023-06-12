@@ -76,6 +76,21 @@ export default () => {
       console.error("Error fetching data:", error);
     }
   };
+  function handleDate(tweetDate) {
+    const differenceInHours = Math.abs(new Date() - tweetDate) / 36e5; // Diferencia en horas
+
+    let formattedDate;
+
+    if (differenceInHours < 24) {
+      formattedDate = formatDistanceToNow(tweetDate, {
+        addSuffix: true,
+        includeSeconds: true,
+      });
+    } else {
+      formattedDate = format(tweetDate, "MMM dd");
+    }
+    return formattedDate;
+  }
 
   return (
     <div className="container-fluid container-lg">
@@ -177,7 +192,15 @@ export default () => {
                     alt={`Avatar del usuario ${user.username}`}
                     className="img-avatar rounded-circle"
                   />
+
                   <div className="d-flex flex-column w-100">
+                    <div className="d-flex gap-2 flex-column">
+                      <h5>{getUsernameShort(user.username)}</h5>
+                      <span className="text-secondary">
+                        @{getUsernameShort(user.username)} -{" "}
+                        {handleDate(new Date(tweet.createdAt))}
+                      </span>
+                    </div>
                     <p> {tweet.content}</p>
                     <div className="d-flex justify-content-between">
                       <span className="text-pink d-flex align-items-center gap-1">
