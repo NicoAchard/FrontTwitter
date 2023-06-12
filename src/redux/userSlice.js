@@ -15,9 +15,12 @@ const userSlice = createSlice({
         id: action.payload.id,
       };
     },
+    deleteData(state, action) {
+      return null;
+    },
   },
 });
 
 const { actions, reducer } = userSlice;
-export const { saveToken, setUserData } = actions;
+export const { saveToken, setUserData, deleteData } = actions;
 export default reducer;

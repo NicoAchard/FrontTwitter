@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { saveToken } from "../redux/userSlice";
+import { deleteData } from "../redux/userSlice";
 
 function Sidebar({ user }) {
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ function Sidebar({ user }) {
             className="btn btn-danger rounded-pill d-none d-lg-block w-100"
             type="submit"
             onClick={() => {
-              dispatch(saveToken(null));
+              dispatch(deleteData());
               navigate("/login");
             }}
           >
@@ -68,7 +68,7 @@ function Sidebar({ user }) {
           <button
             className="btn btn-danger rounded-pill d-block d-lg-none"
             onClick={() => {
-              dispatch(saveToken(null));
+              dispatch(deleteData());
               navigate("/login");
             }}
           >
