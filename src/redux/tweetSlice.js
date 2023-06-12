@@ -7,6 +7,13 @@ const tweetsSlice = createSlice({
     setTweets(state, action) {
       return action.payload;
     },
+
+    addTweets(state, action) {
+      const newState = [...state, action.payload];
+      newState.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      return newState;
+    },
+
     toggleLike(state, action) {
       const tweet = state.find((item) => item._id === action.payload.tweetId);
       const existAlreadyLikes = tweet.likes.some(
@@ -25,5 +32,5 @@ const tweetsSlice = createSlice({
 });
 
 const { actions, reducer } = tweetsSlice;
-export const { setTweets, toggleLike } = actions;
+export const { setTweets, toggleLike, addTweets } = actions;
 export default reducer;
