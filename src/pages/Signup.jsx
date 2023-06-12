@@ -102,11 +102,10 @@ function Signup() {
                 />
                 <label htmlFor="archivo" className="file-label">
                   <input
-                    style={{ color: "transparent" }}
                     type="file"
                     id="archivo"
                     name="file"
-                    className="file"
+                    className="file form-control"
                     value={inputImage}
                     onChange={(event) => setInputImage(event.target.value)}
                   />
