@@ -12,7 +12,6 @@ const tweetsSlice = createSlice({
       const existAlreadyLikes = tweet.likes.some(
         (item) => item.toString() === action.payload.userId
       );
-
       if (existAlreadyLikes) {
         tweet.likes = tweet.likes.filter(
           (item) => item !== action.payload.userId
@@ -21,9 +20,13 @@ const tweetsSlice = createSlice({
         tweet.likes.push(action.payload.userId);
       }
     },
+    deleteTweet(state, action) {
+      const tweetId = action.payload;
+      return state.filter((tweet) => tweet._id !== tweetId);
+    },
   },
 });
 
 const { actions, reducer } = tweetsSlice;
-export const { setTweets, toggleLike } = actions;
+export const { setTweets, toggleLike, deleteTweet } = actions;
 export default reducer;

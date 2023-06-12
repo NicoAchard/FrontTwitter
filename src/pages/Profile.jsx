@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { setTweets, toggleLike } from "../redux/tweetSlice";
+import { setTweets, toggleLike, deleteTweet } from "../redux/tweetSlice";
 import Sidebar from "../components/Sidebar";
 import Aside from "../components/Aside";
 import { formatDistanceToNow, format } from "date-fns";
@@ -70,11 +70,14 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(setTweets(response.data.tweetList));
+      if (response.status === 200) {
+        dispatch(deleteTweet(paramId));
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
   function handleDate(tweetDate) {
     const differenceInHours = Math.abs(new Date() - tweetDate) / 36e5; // Diferencia en horas
 

@@ -2,7 +2,7 @@ import Sidebar from "../components/Sidebar";
 import Aside from "../components/Aside";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setTweets, toggleLike } from "../redux/tweetSlice";
+import { setTweets, toggleLike, deleteTweet } from "../redux/tweetSlice";
 import axios from "axios";
 import { formatDistanceToNow, format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -113,6 +113,7 @@ export default () => {
     }
     return formattedDate;
   }
+
   const handlerDelete = async (paramId) => {
     try {
       const response = await axios({
@@ -122,7 +123,9 @@ export default () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(setTweets(response.data.tweetList));
+      if (response.status === 200) {
+        dispatch(deleteTweet(paramId));
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -217,11 +220,18 @@ export default () => {
                           </span>
                           {tweet.author.id === user.id && (
                             <span className="text-pink d-flex align-items-center gap-1">
-                              <FontAwesomeIcon
-                                style={{ color: "#dc3545", cursor: "pointer" }}
-                                onClick={() => handlerDelete(tweet._id)}
-                                icon="fa-solid fa-trash"
-                              />
+                              {tweets.some(
+                                (item) => item._id === tweet._id
+                              ) && (
+                                <FontAwesomeIcon
+                                  style={{
+                                    color: "#dc3545",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => handlerDelete(tweet._id)}
+                                  icon="fa-solid fa-trash"
+                                />
+                              )}
                             </span>
                           )}
                         </div>
