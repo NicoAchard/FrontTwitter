@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTweets, toggleLike } from "../redux/tweetSlice";
 import axios from "axios";
+import { formatDistanceToNow, format } from "date-fns";
 
 export default () => {
   const [user, setUser] = useState(null);
@@ -89,10 +90,28 @@ export default () => {
       };
       const response = await axios.request(options);
       console.log(response);
+      dispatch(setTweets(response.data.tweets));
+      setInputTweet("");
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
+  function handleDate(tweetDate) {
+    const differenceInHours = Math.abs(new Date() - tweetDate) / 36e5; // Diferencia en horas
+
+    let formattedDate;
+
+    if (differenceInHours < 24) {
+      formattedDate = formatDistanceToNow(tweetDate, {
+        addSuffix: true,
+        includeSeconds: true,
+      });
+    } else {
+      formattedDate = format(tweetDate, "MMM dd");
+    }
+    return formattedDate;
+  }
 
   return (
     <div className="container-fluid container-lg">
@@ -157,7 +176,7 @@ export default () => {
                         <h5>{getUsernameShort(tweet.author.username)}</h5>
                         <span className="text-secondary">
                           @{getUsernameShort(tweet.author.username)} -{" "}
-                          {tweet.createdAt.slice(0, 10)}
+                          {handleDate(new Date(tweet.createdAt))}
                         </span>
                       </div>
                       <p> {tweet.content}</p>
