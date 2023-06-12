@@ -164,7 +164,7 @@ export default () => {
                 Tweets
               </b>
             </div>
-            {console.log(tweets)}
+
             {tweets.map((tweet) => (
               <div
                 className="d-flex flex-column p-3 border-bottom border-top border-1"
