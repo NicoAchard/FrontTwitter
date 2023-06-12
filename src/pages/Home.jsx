@@ -210,13 +210,13 @@ export default () => {
                         {tweet.likes.includes(user.id) ? (
                           <i
                             className="bi bi-heart-fill"
-                            onClick={() => handlerLike(tweet.id)}
+                            onClick={() => handlerLike(tweet._id)}
                             style={{ color: "#f91894", cursor: "pointer" }}
                           ></i>
                         ) : (
                           <i
                             className="bi bi-heart"
-                            onClick={() => handlerLike(tweet.id)}
+                            onClick={() => handlerLike(tweet._id)}
                             style={{ cursor: "pointer" }}
                           ></i>
                         )}
