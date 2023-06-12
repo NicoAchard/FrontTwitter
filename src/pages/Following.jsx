@@ -29,7 +29,6 @@ function Following() {
   }, []);
 
   async function handlerFollow(userTargetId) {
-    console.log("hola");
     try {
       const options = {
         method: "POST",
@@ -111,7 +110,7 @@ function Following() {
                     </div>
                     <div>
                       {user.following.some(
-                        (item) => item.id.toString() === following.id.toString()
+                        (item) => item.id === following.id
                       ) ? (
                         <button
                           type="submit"

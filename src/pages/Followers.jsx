@@ -107,7 +107,7 @@ function Followers() {
                     </div>
                     <div>
                       {user.following.some(
-                        (item) => item.id.toString() === follower.id.toString()
+                        (item) => item.id === follower.id
                       ) ? (
                         <button
                           type="submit"
