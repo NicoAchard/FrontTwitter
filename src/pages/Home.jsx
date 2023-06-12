@@ -226,7 +226,7 @@ export default () => {
                         <span className="text-pink d-flex align-items-center gap-1">
                           <FontAwesomeIcon
                             style={{ color: "#dc3545", cursor: "pointer" }}
-                            onClick={() => handlerDelete(tweet.id)}
+                            onClick={() => handlerDelete(tweet._id)}
                             icon="fa-solid fa-trash"
                           />
                         </span>
