@@ -7,12 +7,18 @@ const tweetsSlice = createSlice({
     setTweets(state, action) {
       return action.payload;
     },
+
+    addTweets(state, action) {
+      const newState = [...state, action.payload];
+      newState.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      return newState;
+    },
+
     toggleLike(state, action) {
       const tweet = state.find((item) => item._id === action.payload.tweetId);
       const existAlreadyLikes = tweet.likes.some(
         (item) => item.toString() === action.payload.userId
       );
-
       if (existAlreadyLikes) {
         tweet.likes = tweet.likes.filter(
           (item) => item !== action.payload.userId
@@ -21,9 +27,13 @@ const tweetsSlice = createSlice({
         tweet.likes.push(action.payload.userId);
       }
     },
+    deleteTweet(state, action) {
+      const tweetId = action.payload;
+      return state.filter((tweet) => tweet._id !== tweetId);
+    },
   },
 });
 
 const { actions, reducer } = tweetsSlice;
-export const { setTweets, toggleLike } = actions;
+export const { setTweets, toggleLike, addTweets, deleteTweet } = actions;
 export default reducer;

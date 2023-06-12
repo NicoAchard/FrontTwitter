@@ -56,7 +56,6 @@ export default () => {
       const userProfileUpdateLike = { ...userProfile };
       userProfileUpdateLike.tweetList.map((tweet) => {
         if (tweet._id === tweetId) {
-          console.log(tweet);
           if (tweet.likes.includes(userLoggedId)) {
             tweet.likes = tweet.likes.filter((id) => id !== userLoggedId);
           } else {
@@ -72,20 +71,38 @@ export default () => {
     }
   }
 
-  const handlerDelete = async (paramId) => {
+  const handlerDelete = async (tweetId) => {
     try {
       const response = await axios({
         method: "DELETE",
-        url: `${import.meta.env.VITE_API_URL}/tweets/${paramId}`,
+        url: `${import.meta.env.VITE_API_URL}/tweets/${tweetId}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(setTweets(response.data.tweetList));
+
+      //cambiar el estado de borrar en la aplicacion
+      const userProfileDeleteTweet = { ...userProfile };
+      userProfileDeleteTweet.tweetList.map((tweet) => {
+        if (tweet._id === tweetId) {
+          userProfileDeleteTweet.tweetList.filter((id) => id !== userLoggedId);
+          if (tweet.likes.includes(userLoggedId)) {
+            tweet.likes = tweet.likes.filter((id) => id !== userLoggedId);
+          } else {
+            tweet.likes.push(userLoggedId);
+          }
+        }
+      });
+
+      setUserProfile(userProfileUpdateLike);
+
+      if (response.status === 200) {
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
   function handleDate(tweetDate) {
     const differenceInHours = Math.abs(new Date() - tweetDate) / 36e5; // Diferencia en horas
 
