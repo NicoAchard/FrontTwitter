@@ -56,7 +56,6 @@ export default () => {
 
       dispatch(toggleLike({ tweetId, userId: user.id }));
       const response = await axios.request(options);
-      console.log(response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -184,7 +183,7 @@ export default () => {
             {tweets.map((tweet) => (
               <div
                 className="d-flex flex-column p-3 border-bottom border-top border-1"
-                key={tweet.id}
+                key={tweet._id}
               >
                 <div className="d-flex gap-3">
                   <img
@@ -207,13 +206,13 @@ export default () => {
                         {tweet.likes.includes(user.id) ? (
                           <i
                             className="bi bi-heart-fill"
-                            onClick={() => handlerLike(tweet.id)}
+                            onClick={() => handlerLike(tweet._id)}
                             style={{ color: "#f91894", cursor: "pointer" }}
                           ></i>
                         ) : (
                           <i
                             className="bi bi-heart"
-                            onClick={() => handlerLike(tweet.id)}
+                            onClick={() => handlerLike(tweet._id)}
                             style={{ cursor: "pointer" }}
                           ></i>
                         )}
@@ -221,10 +220,10 @@ export default () => {
                       </span>
 
                       <span className="text-pink d-flex align-items-center gap-1">
-                        {tweets.some((item) => item.id === tweet.id) && (
+                        {tweets.some((item) => item._id === tweet._id) && (
                           <FontAwesomeIcon
                             style={{ color: "#dc3545", cursor: "pointer" }}
-                            onClick={() => handlerDelete(tweet.id)}
+                            onClick={() => handlerDelete(tweet._id)}
                             icon="fa-solid fa-trash"
                           />
                         )}

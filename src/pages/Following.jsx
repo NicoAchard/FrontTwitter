@@ -43,7 +43,6 @@ function Following() {
 
       const response = await axios.request(options);
       setUser(response.data.user);
-      console.log(response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -94,7 +93,7 @@ function Following() {
                 return (
                   <div
                     className="d-flex justify-content-between w-100 p-3"
-                    key={following.id}
+                    key={following._id}
                   >
                     <div className="d-flex align-items-center gap-3">
                       <img
@@ -110,13 +109,13 @@ function Following() {
                     </div>
                     <div>
                       {user.following.some(
-                        (item) => item.id === following.id
+                        (userFollowing) => userFollowing._id === following._id
                       ) ? (
                         <button
                           type="submit"
                           className="btn btn-light rounded-pill fw-bold border-1 border-black"
                           style={{ backgroundColor: "white" }}
-                          onClick={() => handlerFollow(following.id)}
+                          onClick={() => handlerFollow(following._id)}
                         >
                           Following
                         </button>
@@ -127,7 +126,7 @@ function Following() {
                             backgroundColor: "#1d9bf0",
                             border: "none",
                           }}
-                          onClick={() => handlerFollow(following.id)}
+                          onClick={() => handlerFollow(following._id)}
                         >
                           Follow
                         </button>

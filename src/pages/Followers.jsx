@@ -19,7 +19,6 @@ function Followers() {
             Authorization: `Bearer ${token}`,
           },
         };
-        console.log(`${import.meta.env.VITE_API_URL}usuarios/followers`);
         const response = await axios.request(options);
         setUser(response.data.user);
       } catch (error) {
@@ -30,7 +29,6 @@ function Followers() {
   }, []);
 
   async function handlerFollow(userTargetId) {
-    console.log("hola");
     try {
       const options = {
         method: "POST",
@@ -45,7 +43,6 @@ function Followers() {
 
       const response = await axios.request(options);
       setUser(response.data.user);
-      console.log(response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -61,7 +58,6 @@ function Followers() {
               <Link to={`/profile/${user.username}`}>
                 <i className="bi bi-arrow-left text-black ms-2"> </i>
               </Link>
-              {console.log(user)}
               <div className="ms-4 mt-2">
                 <h5>
                   {user.firstname} {user.lastname}
@@ -91,7 +87,7 @@ function Followers() {
                 return (
                   <div
                     className="d-flex justify-content-between w-100 p-3"
-                    key={follower.id}
+                    key={follower._id}
                   >
                     <div className="d-flex align-items-center gap-3">
                       <img
@@ -107,13 +103,13 @@ function Followers() {
                     </div>
                     <div>
                       {user.following.some(
-                        (item) => item.id === follower.id
+                        (item) => item._id === follower._id
                       ) ? (
                         <button
                           type="submit"
                           className="btn btn-light rounded-pill fw-bold border-1 border-black"
                           style={{ backgroundColor: "white" }}
-                          onClick={() => handlerFollow(follower.id)}
+                          onClick={() => handlerFollow(follower._id)}
                         >
                           Following
                         </button>
@@ -124,7 +120,7 @@ function Followers() {
                             backgroundColor: "#1d9bf0",
                             border: "none",
                           }}
-                          onClick={() => handlerFollow(follower.id)}
+                          onClick={() => handlerFollow(follower._id)}
                         >
                           Follow
                         </button>
