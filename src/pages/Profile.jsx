@@ -218,9 +218,14 @@ export default () => {
                   />
 
                   <div className="d-flex flex-column w-100">
-                    <div className="d-flex gap-2 flex-column">
-                      <h5>{getUsernameShort(userProfile.username)}</h5>
-                      <span className="text-secondary">
+                    <div className="d-flex flex-column">
+                      <h5 className="m-0">
+                        {getUsernameShort(userProfile.username)}
+                      </h5>
+                      <span
+                        className="text-secondary"
+                        style={{ fontSize: "0.9rem" }}
+                      >
                         @{getUsernameShort(userProfile.username)} -{" "}
                         {handleDate(new Date(tweet.createdAt))}
                       </span>
